@@ -1,0 +1,51 @@
+# KiCad
+## temporary files
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups
+*.kicad_prl
+*.sch-bak
+*~
+_autosave-*
+*.tmp
+*-save.pro
+*-save.kicad_pcb
+*.kicad_sch.lck
+*.kicad_pcb.lck
+fp-info-cache
+\#auto_saved_files#
+
+## netlist
+*.net
+
+## autorouter
+*.dsn
+*.ses
+
+## exported sheets
+/hw/export/*.pdf
+/hw/export/*.png
+/hw/export/*.svg
+
+## exported BOM files
+/hw/export/bom.*
+/hw/export/ibom.html
+
+## exported gerbers
+/hw/export/gerbers*
+/hw/export/*.zip
+**/*_gerbers_*.zip
+
+## exported models
+/hw/export/*.step
+
+
+# ESPHome
+/.esphome/
+/secrets.yaml
+
+# Other
+_*

@@ -1,0 +1,319 @@
+# Example ESPHome configuration file for LEDDs v1.0
+###################################################
+## Pinout
+# | Function  | Pin    |
+# |-----------|--------|
+# | relay     | GPIO5  |
+# | ssr_gate  | GPIO15 |
+# | z-c       | GPIO14 |
+# | re_a      | GPIO13 |
+# | re_b      | GPIO12 |
+# | re_btn    | GPIO0  |
+# | left_led  | GPIO2  |
+# | right_led | GPIO16 |
+
+substitutions:
+  device_friendly_name: "LEDDs"
+  update_period_default: 180 s
+
+esphome:
+  name: "ledds"
+  friendly_name: ${device_friendly_name}
+  project:
+    name: "VasilKalchev.LEDDs"
+    version: "1.0"
+
+esp8266:
+  board: esp12e
+  framework:
+    version: recommended
+  restore_from_flash: true
+
+logger:
+    # levels: NONE < ERROR < WARN < INFO < DEBUG < VERBOSE < VERY_VERBOSE
+    level: DEBUG
+
+# Home assistant
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  platform: esphome
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # enable fallback hotspot (captive portal) in case Wi-Fi connection fails
+  ap:
+    ssid: "${device_friendly_name} fallback hotspot"
+    password: !secret web_server_password
+
+# For configuring Wi-Fi manually, uses wifi:ap configuration
+captive_portal:
+
+script:
+  # Cycle the available effects. Must be manually updated with the actual configured effects.
+  - id: cycle_effect
+    parameters:
+      current_effect_name: string
+      forward: bool
+    then:
+      - light.turn_on:
+          id: bulb
+          effect: !lambda |-
+            if (current_effect_name == "None") {
+                if (forward == true) {
+                  return "Pulse (low, fast)";
+                } else {
+                  return "None";
+                }
+            } else if (current_effect_name == "Pulse (low, fast)") {
+                if (forward == true) {
+                  return "Pulse (low, slow)";
+                } else {
+                  return "None";
+                }
+            } else if (current_effect_name == "Pulse (low, slow)") {
+                if (forward == true) {
+                  return "Pulse (high, fast)";
+                } else {
+                  return "Pulse (low, fast)";
+                }
+            } else if (current_effect_name == "Pulse (high, fast)") {
+                if (forward == true) {
+                  return "Flicker (soft)";
+                } else {
+                  return "Pulse (low, slow)";
+                }
+            } else if (current_effect_name == "Flicker (soft)") {
+                if (forward == true) {
+                  return "Flicker (intense)";
+                } else {
+                  return "Pulse (high, fast)";
+                }
+            } else if (current_effect_name == "Flicker (intense)") {
+                if (forward == true) {
+                  return "Flicker (intense)";
+                } else {
+                  return "Flicker (soft)";
+                }
+            } else {
+                return "None";
+            }
+
+# At startup, prints:
+#  - reset reason
+#  - free heap size
+#  - ESPHome version
+# Also provides sensors for:
+#  - free heap size
+#  - fragmentation level of heap
+#  - maximum free block size
+#  - main loop timing
+debug:
+  update_interval: ${update_period_default}
+
+power_supply:
+  - id: ac_relay
+    pin:
+      number: GPIO5
+      # inverted: false
+    enable_time: 50ms  # wait for the relay to make contact
+    keep_on_time: 2s  # wait for the transition length to complete
+
+sensor:
+  - platform: uptime
+    id: uptime_seconds
+    name: Uptime
+    type: seconds
+    update_interval: ${update_period_default}
+    unit_of_measurement: seconds
+    filters:
+      - round: 0
+    # internal: true
+
+  - platform: wifi_signal
+    id: wifi_signal_db
+    name: "Wi-Fi signal strength"
+    update_interval: ${update_period_default}
+    entity_category: "diagnostic"
+    device_class: signal_strength
+
+  - platform: debug
+    loop_time:
+      name: "Loop time"
+
+  - platform: rotary_encoder
+    id: re
+    internal: true
+    icon: "mdi:knob"
+    pin_a: GPIO13
+    pin_b: GPIO12
+    min_value: -1
+    max_value: 1
+    restore_mode: ALWAYS_ZERO
+    filters:
+      - debounce: 50 ms
+    on_clockwise:
+      then:
+        - light.toggle:
+            id: red_led
+            transition_length: 0ms
+        - if:
+            condition:
+              - binary_sensor.is_off: reb
+            then:
+              - logger.log: "RE CW"
+              - light.dim_relative:
+                  id: bulb
+                  relative_brightness: 10%
+                  transition_length: 50 ms
+            else:
+              - logger.log: "RE CW while pressed"
+              - script.execute:
+                  id: cycle_effect
+                  current_effect_name: !lambda return id(bulb).get_effect_name();
+                  forward: true
+        - light.toggle:
+            id: red_led
+            transition_length: 75ms
+
+    on_anticlockwise:
+      then:
+        - light.toggle:
+            id: red_led
+            transition_length: 0ms
+        - if:
+            condition:
+              - binary_sensor.is_off: reb
+            then:
+              - logger.log: "RE CCW"
+              - light.dim_relative:
+                  id: bulb
+                  relative_brightness: -10%
+                  transition_length: 50 ms
+            else:
+              - logger.log: "RE CCW while pressed"
+              - script.execute:
+                  id: cycle_effect
+                  current_effect_name: !lambda return id(bulb).get_effect_name();
+                  forward: false
+        - light.toggle:
+            id: red_led
+            transition_length: 75ms
+
+binary_sensor:
+  - platform: gpio
+    id: reb
+    internal: true
+    pin:
+      number: GPIO0
+      inverted: true
+    on_click:
+      min_length: 50ms
+      max_length: 350ms
+      then:
+        - light.toggle:
+            id: bulb
+            transition_length: 500ms
+
+text_sensor:
+  - platform: debug
+    reset_reason:
+      name: "Reset reason"
+
+button:
+  - platform: restart
+    name: "Restart"
+  - platform: factory_reset
+    name: "Restart with factory default settings"
+
+output:
+  - platform: esp8266_pwm
+    id: gpio2_pwm
+    pin: GPIO2
+    frequency: 200 Hz
+  - platform: esp8266_pwm
+    id: gpio16_pwm
+    frequency: 200 Hz
+    pin: GPIO16
+
+  - platform: ac_dimmer
+    id: gpio15_dimmer
+    gate_pin:
+      number: GPIO15
+      inverted: yes
+    zero_cross_pin:
+      number: GPIO14
+      mode:
+        input: true
+      # inverted: no
+    method: trailing
+    init_with_half_cycle: true
+    zero_means_zero: true
+    min_power: 28%
+    # max_power: 98%
+    power_supply: ac_relay
+
+
+light:
+  - platform: monochromatic
+    id: red_led
+    name: "Red LED"
+    output: gpio2_pwm
+    icon: mdi:led-outline
+    entity_category: "config"
+    default_transition_length: 1000ms
+    restore_mode: ALWAYS_ON
+    initial_state:
+      state: on
+      brightness: 100 %
+  - platform: monochromatic
+    id: blue_led
+    name: "Blue LED"
+    output: gpio16_pwm
+    icon: mdi:led-outline
+    entity_category: "config"
+    default_transition_length: 1000ms
+    restore_mode: ALWAYS_ON
+    initial_state:
+      state: on
+      brightness: 100 %
+
+  - platform: monochromatic
+    id: bulb
+    name: "Bulb"
+    output: gpio15_dimmer
+    default_transition_length: 300ms
+    gamma_correct: 3.0
+    restore_mode: RESTORE_DEFAULT_OFF
+    effects:
+      - pulse:
+          name: "Pulse (low, fast)"
+          transition_length: 4s
+          update_interval: 4s
+          min_brightness: 1%
+          max_brightness: 20%
+      - pulse:
+          name: "Pulse (low, slow)"
+          transition_length: 10s
+          update_interval: 10s
+          min_brightness: 1%
+          max_brightness: 20%
+      - pulse:
+          name: "Pulse (high, fast)"
+          transition_length: 3s
+          update_interval: 3s
+          min_brightness: 50%
+          max_brightness: 100%
+      - flicker:
+          name: "Flicker (soft)"
+          alpha: 99%
+          intensity: 2.5%
+      - flicker:
+          name: "Flicker (intense)"
+          alpha: 99%
+          intensity: 4%
