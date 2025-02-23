@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP esp-12f
+D ESP-12F ESP8266 Wifi Wireless IoT Board Module , package 1 x ESP8266 Adapter Plate  1pcs
+K
+F https://docs.ai-thinker.com/_media/esp8266/docs/esp-12f_product_specification_en.pdf
+$ENDCMP
+#
+#End Doc Library

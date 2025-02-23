@@ -1,0 +1,42 @@
+# KiCad temporary files
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups
+*.kicad_prl
+*.sch-bak
+*~
+_autosave-*
+*.tmp
+*-save.pro
+*-save.kicad_pcb
+*.kicad_sch.lck
+*.kicad_pcb.lck
+fp-info-cache
+
+# KiCad netlist
+*.net
+
+# KiCad autorouter
+*.dsn
+*.ses
+
+# Exported sheets
+/hw/export/*.pdf
+/hw/export/*.png
+/hw/export/*.svg
+
+# Exported BOM files
+/hw/export/bom.*
+
+# Exported Gerbers
+/hw/export/gerbers*
+/hw/export/*.zip
+
+# Exported models
+/hw/export/*.step
+
+# Other
+_*
