@@ -1,6 +1,4 @@
 # <p align="center">LEDDs v0.1</p>
-> LED Dimmer (simple)
-
 
 <p align="center">
   Wi-Fi connected dimmer for LED bulbs.
