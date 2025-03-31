@@ -70,8 +70,10 @@ Located in [enclosure/top_plate/](enclosure/top_plate/).
 
 ## Making the project
 ### 1. Ordering the parts
-#### 1.1. PCB and top panel
-Download the [combined gerbers][dw_combined_gerbers]. These include the PCB and the top plate on a single PCB.
+#### 1.1. PCB and top plate
+Download the [PCB gerbers][dw_gerbers] and the [top plate gerbers][dw_top_plate_gerbers].
+
+Or download the [combined gerbers][dw_combined_gerbers]. These include the PCB and the top plate on a single PCB.
 
 #### 1.2. 3D printed chassis
 Download the [chassis STL file][dw_chassis_stl].
@@ -139,6 +141,7 @@ You're welcome to post photos in [Discussions: Show and tell][discussions_show_a
 
 <!-- release assets -->
 [dw_gerbers]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/gerbers_jlcpcb.zip "gerbers_jlcpcb.zip from release v1.0"
+[dw_top_plate_gerbers]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/top_plate_gerbers_jlcpcb.zip "top_plate_gerbers_jlcpcb.zip from release v1.0"
 [dw_combined_gerbers]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/combined_gerbers_jlcpcb.zip "combined_gerbers_jlcpcb.zip from release v1.0"
 [dw_bom]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/bom.csv "bom.csv from release v1.0"
 [dw_enclosure_bom]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/enclosure_bom.csv "enclosure_bom.csv from release v1.0"
