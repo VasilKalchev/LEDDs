@@ -1,4 +1,7 @@
-<h1 style="text-align: center;">LEDDs</h1>
+<p align=center>
+  <img src="doc/assets/ledds_title.png" alt="LEDDs" title="LEDDs" />
+</p>
+
 <p align=center>trailing-edge dimmer for LED bulbs</p>
 
 <div align=center>
@@ -299,6 +302,7 @@ This project is licensed under the **MIT License**.
 
 
 <!-- links -->
+
 [discussions_show_and_tell]: https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell
 
 <!-- /links -->
