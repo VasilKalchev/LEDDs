@@ -19,28 +19,27 @@ The project consists of a PCB, a 3D-printable chassis, and a top plate designed 
 * [Why trailing-edge?](#why-trailing-edge)
 * [Features](#features)
 * [Specifications](#specifications)
-* [Release/fabrication of version 2.0](#release-fabrication-of-version2.0)
-* [Repository structure](#repository-structure)
-* [Bill of materials](#bill-of-materials)
-* [Build](#build)
+* [Release/fabrication of version 2.0](#releasefabrication-of-v20)
+* [Repository structure](#open_file_folder-repository-structure)
+* [Bill of materials](#moneybag-bill-of-materials)
+* [Build](#hammer-build)
    * [Prerequisites](#prerequisites)
-   * [1. Ordering the components](#1.-ordering-the-components)
-   * [2. PCB assembly instructions](#2.-pcb-assembly-instructions)
-   * [3. Flashing the firmware](#3.-flashing-the-firmware)
-   * [4. Preparing the enclosure](#4.-preparing-the-enclosure)
-   * [5. Final assembly](#5.-final-assembly)
+   * [1. Ordering the components](#1-ordering-the-components)
+   * [2. PCB assembly instructions](#2-pcb-assembly-instructions)
+   * [3. Flashing the firmware](#3-flashing-the-firmware)
+   * [4. Preparing the enclosure](#4-preparing-the-enclosure)
+   * [5. Final assembly](#5-final-assembly)
 * [Usage](#usage)
    * [Control](#control)
    * [LED indicators](#led-indicators)
    * [Default light effects](#default-light-effects)
-* [Versions, releases & compatibility](#versions,-releases--compatibility)
+* [Versions, releases and compatibility](#versions-releases-and-compatibility)
 * [Contributing](#contributing)
-* [Sources](#sources)
 * [License](#license)
 
-## ⚠️ Safety warning
+---
 
-> [!DANGER]
+> [!CAUTION]
 > **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
 > * Do not attempt to build this device unless you are experienced with high-voltage electronics.
 > * The device must be unplugged from mains power before opening the enclosure.
@@ -252,7 +251,7 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 8. **Flicker (intense)**: intense flicker, imitating candle light
 
 
-## Versions, releases & compatibility
+## Versions, releases and compatibility
 Each fabrication run results in a **GitHub release**.
 - Semantic versioning (major.minor), no patch versions
 - **PCB, chassis, and top plate are versioned independently**
