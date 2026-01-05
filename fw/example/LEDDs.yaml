@@ -142,9 +142,9 @@ sensor:
     entity_category: "diagnostic"
     device_class: signal_strength
 
-  - platform: debug
-    loop_time:
-      name: "Loop time"
+  # - platform: debug
+  #   loop_time:
+  #     name: "Loop time"
 
   - platform: rotary_encoder
     id: re
