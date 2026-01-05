@@ -9,7 +9,6 @@ Fabrication results.
 >
 > :memo: Recommended for fabrication!
 
-
 ### Properties:
  - Fabricator: JLCPCB
  - Material: FR4 (Tg 135)
@@ -24,11 +23,8 @@ Fabrication results.
  - Appearance quality: IPC Class 2 Standard
  - Silkscreen technology: Ink-jet/screen printing
 
-
 ### Problems
 #### Minor
- - top plate: the holes around the knob cutout are too close to the edge
- - top plate: knob cutout is too wide
  - red LED is only visible from one side
 
 
@@ -38,7 +34,6 @@ Fabrication results.
 > The fabricated board from release v1.0 works, but has some minor issues.
 >
 > :grey_exclamation: Obsolete.
-
 
 ### Properties:
  - Fabricator: JLCPCB
@@ -62,9 +57,6 @@ Fabrication results.
  - silkscreen with GitHub link is barely readable
  - relay pins cutouts are very close to the edge of the board
  - GPIO2 is connected to both led_1 and ESP-12's on-board LED
- - RST hole is too small
- - terminal screw holes are too small
- - it'll be better if the board can be rotated
 
 
 <!-- checklist
