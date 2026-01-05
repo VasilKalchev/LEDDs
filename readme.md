@@ -15,8 +15,6 @@
 
 The project consists of a PCB, a 3D-printable chassis, and a top plate designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a rotary encoder so it can be controlled easily or used as a standalone device.
 
----
-
 > [!CAUTION]
 > **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
 > * Do not attempt to build this device unless you are experienced with high-voltage electronics.
@@ -25,12 +23,12 @@ The project consists of a PCB, a 3D-printable chassis, and a top plate designed 
 
 
 ## Table of contents
-* [Why trailing-edge?](#why-trailing-edge)
-* [Features](#features)
-* [Specifications](#specifications)
+* [Why trailing-edge?](#grey_question-why-trailing-edge)
+* [Features](#star-features)
+* [Specifications](#straight_ruler-specifications)
 * [Release/fabrication of version 2.0](#releasefabrication-of-v20)
 * [Repository structure](#open_file_folder-repository-structure)
-* [Bill of materials](#moneybag-bill-of-materials)
+* [Bill of materials](#euro-bill-of-materials)
 * [Build](#hammer-build)
    * [Prerequisites](#prerequisites)
    * [1. Ordering the components](#1-ordering-the-components)
@@ -48,7 +46,7 @@ The project consists of a PCB, a 3D-printable chassis, and a top plate designed 
 
 ---
 
-## Why trailing-edge?
+## :grey_question: Why trailing-edge?
 Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of every AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
 
 **LEDDs uses trailing-edge dimming.** By using MOSFETs to cut the waveform at the *end* of the AC cycle, the voltage ramps down smoothly. This results in:
@@ -56,7 +54,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 * smoother dimming with reduced flicker
 * lower minimum brightness levels
 
-## Features
+## :star: Features
 - **ESP32-C3** based with ESPHome firmware for integration with Home Assistant.
 - **Standalone operation**, doesn't require Home Assistant.
 - **Intuitive rotary encoder control**: rotate to dim, press+rotate for effects, press for on/off.
@@ -65,7 +63,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 - Low idle power: ~0.3 W standby consumption
 - Open source: MIT licensed
 
-## Specifications
+## :straight_ruler: Specifications
 
 | Parameter              | Value                        |
 | ---------------------- | ---------------------------- |
@@ -85,9 +83,9 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ## Release/fabrication of v2.0
 ![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release v2.0 works, but has some minor issues: [releaselog v2.0][releaselog_v2_0].
+> The fabricated board from release v2.0 works, but has some minor issues: [releaselog.md v2.0][releaselog_v2_0].
 > 
-> :memo: Recommended for fabrication!
+> :tada: Recommended for fabrication!
 
 ---
 
@@ -108,14 +106,14 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ```
 
 ---
-## :moneybag: Bill of materials
+## :euro: Bill of materials
 Approximate cost
  - components: €[TBD]
  - PCB: €4 (ordered as prototype board)
  - chassis: €4-10 (when ordered, depends on material, etc)
  - top plate: €4 (can be combined with the main PCB)
 
-See [link_TBD](link) for complete component list.
+See [BOM][dw_bom_v2_0] for complete component list.
 
 
 ## :hammer: Build
@@ -126,14 +124,15 @@ See [link_TBD](link) for complete component list.
 ### 1. Ordering the components
   - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
     - **gerbers** for JLCPCB: [main board], [top plate]
-    - for other fabricators - use KiCad to generate gerbers according to their instructions
-    - see the [release log.md](releaselog.md) for tested board properties
+    - for other fabricators - use KiCad to generate gerbers according to the manufactorers instructions
+    - see the [release log.md](/docs/releaselog.md) for tested board properties
+   - **top plate**:
+     Select a top plate from [/enclosure/top_plate/](/enclosure/top_plate/).
    - **Chassis**:
-     - [plastic variant]: designed for heat-set threaded inserts
-     - [resin variant]: designed for directly threading in screws
+     Select a chassis from [/enclosure/chassis/](/enclosure/chassis/).
 
 ### 2. PCB assembly instructions
-Use the [interactive BOM]() to solder the components.
+Use the [interactive BOM][dw_ibom_v2_0] to solder the components.
 
 #### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
@@ -185,13 +184,13 @@ Solder R12 and header J4, use a USB to serial adapter.
 - Connect to the board via USB-C
 - Visit [ESPHome web flasher](https://web.esphome.io/)
 - Upload one of the provided binaries:
-	- [full.bin](): Home Assistant + rotary encoder
-	- [webui.bin](): self hosted web UI + rotary encoder
-	- [standalone](): rotary encoder only
+	- [full.bin][dw_full_bin_v2_0]: Home Assistant + rotary encoder
+	- [web_server.bin][dw_web_server_bin_v2_0]: self hosted web server + rotary encoder
+	- [standalone][dw_standalone_bin_v2_0]: rotary encoder only
 - Set your Wi-Fi credentials using the ESPHome web flasher
 - Test before wiring
 
-For further customization, the YAML configurations used for creating these binaries are located in [fw/yaml/]().
+For further customization, the YAML configurations used for creating these binaries are located in [/fw/yaml/][/fw/yaml/].
 
 ### 4. Preparing the enclosure
 - Plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron.
@@ -218,7 +217,7 @@ For further customization, the YAML configurations used for creating these binar
 **Home Assistant:**
 *Included in [hass.bin].*
 
-Integrating the device in Home Assistant: [https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant].
+Integrating the device in Home Assistant: (https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant).
 
 [hass_ui_screenshot.png]
 
@@ -272,8 +271,6 @@ enclosure/
 	└── v2.0-pcbart/
 ```
 
-Release assessment and notes are documented in [releaselog.md]().
-
 
 ## Contributing
 Every type of contribution is welcome, like improvements or corrections on the:
@@ -305,6 +302,15 @@ This project is licensed under the **MIT License**.
 
 <!-- links -->
 
+[releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02 "/doc/releaselog.md"
+
+[dw_bom_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/bom.csv "bom.csv from release v2.0"
+[dw_ibom_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html "ibom.html from release v2.0"
+
+[dw_full_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/full.bin "full.bin from release v2.0"
+[dw_web_server_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/web_server.bin "web_server.bin from release v2.0"
+[dw_standalone_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/standalone.bin "standalone.bin from release v2.0"
+	
 [discussions_show_and_tell]: https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell
 
 <!-- /links -->
