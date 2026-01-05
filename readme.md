@@ -90,18 +90,18 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 ## :open_file_folder: Repository structure
 ```
-├── [hw/](hw/)                   # KiCad PCB designs
-│   ├── [lib/](hw/lib/)               # symbols and footprints
-│   ├── assets/        # fonts and graphics
-│   ├── export/        # scripts for exporting gerbers, BOM and schematics/PCB PDFs
-├── [fw/](fw/)                     # ESPHome YAML configurations and firmware binaries
+├── hw/                     # KiCad PCB designs
+│   ├── lib/                # symbols and footprints
+│   ├── assets/             # fonts and graphics
+│   ├── export/             # scripts for exporting gerbers, BOM and schematics/PCB PDFs
+├── fw/                     # ESPHome YAML configurations and firmware binaries
 ├── enclosure/
-│   ├── [chassis/](enclosure/chassis/)       # 3D printable chassis
+│   ├── chassis/            # 3D printable chassis
 │   |   └── vX.Y-variant/
-│   └── top_plate/   # top plate design
+│   └── top_plate/          # top plate design
 │        └── vX.Y-variant/
-├── doc/                  # additional documentation
-└── img/                  # photos and renders
+├── doc/                    # additional documentation
+└── img/                    # photos and renders
 ```
 
 ---
