@@ -1,5 +1,5 @@
 <p align=center>
-  <img src="doc/assets/ledds_title.png" alt="LEDDs" title="LEDDs" />
+  <img src="doc/assets/ledds_title.png" alt="LEDDs" title="LEDDs" width="50%" />
 </p>
 
 <p align=center>trailing-edge dimmer for LED bulbs</p>
