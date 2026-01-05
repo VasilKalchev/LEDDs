@@ -6,7 +6,7 @@
 
 <div align=center>
 
-![schematic_pcb](https://img.shields.io/badge/KiCad-msg?style=flat-square&logo=kicad&logoColor=ivory&logoSize=auto&label=Schematic%20%2F%20PCB&labelColor=grey&color=ivory) ![firmware](https://img.shields.io/badge/ESPHome-msg?style=flat-square&logo=esphome&logoColor=ivory&logoSize=auto&label=Firmware&labelColor=grey&color=ivory&link=https%3A%2F%2Fesphome.io) ![chassis](https://img.shields.io/badge/Tinkercad-msg?style=flat-square&logo=tinkercad&logoColor=ivory&logoSize=auto&label=Chassis&labelColor=grey&color=ivory&link=https%3A%2F%2Fwww.tinkercad.com%2F)
+![schematic_pcb](https://img.shields.io/badge/KiCad-msg?style=flat-square&logo=kicad&logoColor=ivory&logoSize=auto&label=Schematic%20%2F%20PCB&labelColor=grey&color=gainsboro) ![firmware](https://img.shields.io/badge/ESPHome-msg?style=flat-square&logo=esphome&logoColor=ivory&logoSize=auto&label=Firmware&labelColor=grey&color=gainsboro&link=https%3A%2F%2Fesphome.io) ![chassis](https://img.shields.io/badge/Tinkercad-msg?style=flat-square&logo=tinkercad&logoColor=ivory&logoSize=auto&label=Chassis&labelColor=grey&color=gainsboro&link=https%3A%2F%2Fwww.tinkercad.com%2F)
 
 </div>
 
@@ -14,6 +14,15 @@
 **LEDDs** is an open-hardware, DIY smart dimmer designed for 230 V LED bulbs. It is built around the ESP32-C3-12F and is designed to sit on a desk or table, replacing standard inline cord switches.
 
 The project consists of a PCB, a 3D-printable chassis, and a top plate designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a rotary encoder so it can be controlled easily or used as a standalone device.
+
+---
+
+> [!CAUTION]
+> **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
+> * Do not attempt to build this device unless you are experienced with high-voltage electronics.
+> * The device must be unplugged from mains power before opening the enclosure.
+> * While the design includes safety features (fuse, MOVs), it is not a certified design and should be treated with caution.
+
 
 ## Table of contents
 * [Why trailing-edge?](#why-trailing-edge)
@@ -38,12 +47,6 @@ The project consists of a PCB, a 3D-printable chassis, and a top plate designed 
 * [License](#license)
 
 ---
-
-> [!CAUTION]
-> **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
-> * Do not attempt to build this device unless you are experienced with high-voltage electronics.
-> * The device must be unplugged from mains power before opening the enclosure.
-> * While the design includes safety features (fuse, MOVs), it is not a certified design and should be treated with caution.
 
 ## Why trailing-edge?
 Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of every AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
