@@ -7,4 +7,5 @@
   (lib (name "4N35SM")(type "KiCad")(uri "${KIPRJMOD}/lib/4N35SM/4N35SM.kicad_sym")(options "")(descr ""))
   (lib (name "UF4004")(type "KiCad")(uri "${KIPRJMOD}/lib/UF4004/UF4004.kicad_sym")(options "")(descr ""))
   (lib (name "PC817XI")(type "KiCad")(uri "${KIPRJMOD}/lib/PC817XI/PC817XI.kicad_sym")(options "")(descr ""))
+  (lib (name "ESP32-C3-12F")(type "KiCad")(uri "${KIPRJMOD}/lib/ESP32-C3-12F/ESP32-C3-12F.kicad_sym")(options "")(descr ""))
 )

@@ -1,13 +1,13 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "4b8ead67-cd50-40db-9222-3dff52651e75")
 	(paper "A4")
 	(title_block
 		(title "LEDDs")
-		(date "2025-02-17")
-		(rev "1.0")
+		(date "2025-04-02")
+		(rev "2.0")
 		(company "Vas's lab")
 	)
 	(lib_symbols
@@ -145,6 +145,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Mechanical:MountingHole"
 			(pin_names
@@ -227,6 +228,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(wire
@@ -261,7 +263,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 158.75 180.34 0)
+		(at 166.37 180.34 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom no)
@@ -269,7 +271,7 @@
 		(dnp no)
 		(uuid "b0f75c3e-27fb-4cd9-accd-db1a2f6d4f76")
 		(property "Reference" "H1"
-			(at 161.036 179.07 0)
+			(at 168.656 179.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -277,8 +279,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "mounting hole"
-			(at 161.036 181.61 0)
+		(property "Value" "20mm"
+			(at 168.656 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -287,7 +289,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
-			(at 158.75 180.34 0)
+			(at 166.37 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -296,7 +298,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 158.75 180.34 0)
+			(at 166.37 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -304,8 +306,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M3"
-			(at 158.75 180.34 0)
+		(property "Description" "M3x20mm"
+			(at 166.37 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -324,7 +326,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 158.75 193.04 0)
+		(at 166.37 193.04 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom no)
@@ -332,7 +334,7 @@
 		(dnp no)
 		(uuid "bd8a1685-7690-4869-ac19-99c040a7f1ac")
 		(property "Reference" "H3"
-			(at 161.036 191.7699 0)
+			(at 168.656 191.7699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -340,8 +342,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "mounting hole"
-			(at 161.036 194.3099 0)
+		(property "Value" "20mm"
+			(at 168.656 194.3099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -350,7 +352,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
-			(at 158.75 193.04 0)
+			(at 166.37 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -359,7 +361,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 158.75 193.04 0)
+			(at 166.37 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -367,8 +369,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M3"
-			(at 158.75 193.04 0)
+		(property "Description" "M3x20mm"
+			(at 166.37 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -387,7 +389,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 158.75 186.69 0)
+		(at 166.37 186.69 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom no)
@@ -395,7 +397,7 @@
 		(dnp no)
 		(uuid "d2b4088a-26ee-4698-b821-8034c487ddac")
 		(property "Reference" "H2"
-			(at 161.036 185.42 0)
+			(at 168.656 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -403,8 +405,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "mounting hole"
-			(at 161.036 187.96 0)
+		(property "Value" "20mm"
+			(at 168.656 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -413,7 +415,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
-			(at 158.75 186.69 0)
+			(at 166.37 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -422,7 +424,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 158.75 186.69 0)
+			(at 166.37 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -430,8 +432,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M3"
-			(at 158.75 186.69 0)
+		(property "Description" "M3x20mm"
+			(at 166.37 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -515,6 +517,10 @@
 	(sheet
 		(at 140.97 86.36)
 		(size 20.32 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -544,33 +550,33 @@
 		)
 		(pin "z-c" input
 			(at 161.29 90.17 0)
+			(uuid "679f93fc-c700-41dc-a358-cd9481ca8ca0")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "679f93fc-c700-41dc-a358-cd9481ca8ca0")
 		)
 		(pin "relay" output
 			(at 140.97 90.17 180)
+			(uuid "01b3a2a3-28a2-4578-b955-f2e4dc6e7a23")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "01b3a2a3-28a2-4578-b955-f2e4dc6e7a23")
 		)
 		(pin "ssr_gate" output
 			(at 161.29 92.71 0)
+			(uuid "86c0984c-5f8d-4d25-874c-d5a80856ee41")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "86c0984c-5f8d-4d25-874c-d5a80856ee41")
 		)
 		(instances
 			(project "LEDDs"
@@ -582,7 +588,11 @@
 	)
 	(sheet
 		(at 163.83 86.36)
-		(size 22.86 20.32)
+		(size 20.32 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -612,23 +622,23 @@
 		)
 		(pin "z-c" output
 			(at 163.83 90.17 180)
+			(uuid "a4b861e1-3ff1-4247-8d85-1fa7481f6005")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "a4b861e1-3ff1-4247-8d85-1fa7481f6005")
 		)
 		(pin "ssr_gate" input
 			(at 163.83 92.71 180)
+			(uuid "4ddbc1a2-c57f-467e-908f-46f3d13fad03")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "4ddbc1a2-c57f-467e-908f-46f3d13fad03")
 		)
 		(instances
 			(project "LEDDs"
@@ -639,8 +649,12 @@
 		)
 	)
 	(sheet
-		(at 119.38 86.36)
-		(size 19.05 20.32)
+		(at 118.11 86.36)
+		(size 20.32 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -651,7 +665,7 @@
 		)
 		(uuid "de1d4f3d-3b5a-4eca-b93d-0e753bcf97ee")
 		(property "Sheetname" "Power"
-			(at 119.38 85.6484 0)
+			(at 118.11 85.6484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -660,7 +674,7 @@
 			)
 		)
 		(property "Sheetfile" "pwr.kicad_sch"
-			(at 119.38 107.2646 0)
+			(at 118.11 107.2646 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -670,13 +684,13 @@
 		)
 		(pin "relay" input
 			(at 138.43 90.17 0)
+			(uuid "df706e2b-8b02-446d-b235-f6e8c20c9d82")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "df706e2b-8b02-446d-b235-f6e8c20c9d82")
 		)
 		(instances
 			(project "LEDDs"
@@ -691,4 +705,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )

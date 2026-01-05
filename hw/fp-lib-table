@@ -8,4 +8,5 @@
   (lib (name "PC817XI")(type "KiCad")(uri "${KIPRJMOD}/lib/PC817XI")(options "")(descr ""))
   (lib (name "SOT223")(type "KiCad")(uri "${KIPRJMOD}/lib/SOT223")(options "")(descr ""))
   (lib (name "RotaryEncoder_Knob")(type "KiCad")(uri "${KIPRJMOD}/lib/RotaryEncoder_Knob")(options "")(descr ""))
+  (lib (name "ESP32-C3-12F")(type "KiCad")(uri "${KIPRJMOD}/lib/ESP32-C3-12F")(options "")(descr ""))
 )
