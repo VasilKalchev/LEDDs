@@ -1,6 +1,5 @@
-"Reference","Value","Name"
-"S1..S3","M3x20mm","Screw"
-"SP1..SP3","M3x15mm","Spacer"
-"TI1..TI2","M3xL:4mmxOD:4.2mm","Threaded insert"
-"P1","","AC plug"
-"W1,W2","2-core","Wire"
+Reference,Value,Name
+S1..S3,M3x20mm,Screw
+SP1..SP3,M3x15mm,Spacer
+TI1..TI2,M3xL:4mmxOD:4.2mm,Threaded insert
+K,D:20mm,Knob
