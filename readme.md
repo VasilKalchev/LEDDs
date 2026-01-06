@@ -56,8 +56,8 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 ## :star: Features
 - **ESP32-C3** based with ESPHome firmware for integration with Home Assistant.
-- **Standalone operation**, doesn't require Home Assistant.
-- **Intuitive rotary encoder control**: rotate to dim, press+rotate for effects, press for on/off.
+- **Standalone** operation, doesn't require Home Assistant.
+- **Rotary encoder** control: rotate to dim, press+rotate for effects, press for on/off.
 - LEDs: red (rotation feedback), blue (status indicator), white (ambient).
 - Included **enclosure design**: 100 mm × 51 mm × 25 mm - ideal for desk lamp modifications.
 - Low idle power: ~0.3 W standby consumption
@@ -69,17 +69,17 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 | ---------------------- | ---------------------------- |
 | Input voltage          | 230 V AC                     |
 | Maximum output power   | 100 W                        |
-| Idle power draw        | ~0.3W                        |
+| Idle power draw        | ~0.3 W                       |
 | Protections            | fuse and MOVs                |
-| Microcontroller module | ESP32-C3-12F [^1]             |
+| Microcontroller module | ESP32-C3-12F [^1]            |
 | Dimensions             | 100 × 51 × 25 mm (W × D × H) |
 | Connectivity           | Wi-Fi, USB-C (programming)   |
 
 > [!NOTE]
-> Designed for 230 V, 50 Hz AC. Usage with 120 V, 60 Hz AC will probably require adjusting component values of the zero-cross and the voltage regulator circuits.
-
+> Designed for 230 V, 50 Hz AC. Usage with 120 V, 60 Hz AC will possibly require adjusting component values of the zero-cross and the voltage regulator circuits.
 
 ---
+
 ## Release/fabrication of v2.0
 ![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
 
@@ -94,14 +94,23 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ├── hw/                     # KiCad PCB designs
 │   ├── lib/                # symbols and footprints
 │   ├── assets/             # fonts and graphics
-│   ├── export/             # scripts for exporting gerbers, BOM and schematics/PCB PDFs
+│   └── export/             # scripts for exporting gerbers, BOM and schematics/PCB PDFs
 ├── fw/                     # ESPHome YAML configurations and firmware binaries
+├── doc/                    # additional documentation
+│   ├── releaselog.md       # main PCB release log
+│   ├── changelog.md        # main PCB change log
+│   └── conventions.md
 ├── enclosure/
 │   ├── chassis/            # 3D printable chassis
-│   |   └── vX.Y-variant/
+│   │   ├── releaselog.md   # chassis release log
+│   │   ├── changelog.md    # chassis change log
+│   │   ├── vX.Y-variant_a/
+│   │   └── vX.Y-variant_b/
 │   └── top_plate/          # top plate design
-│        └── vX.Y-variant/
-├── doc/                    # additional documentation
+│       ├── releaselog.md   # top plate release log
+│       ├── changelog.md    # top plate change log
+│       ├── vX.Y-variant_a/
+│       └── vX.Y-variant_b/
 └── img/                    # photos and renders
 ```
 
@@ -111,7 +120,7 @@ Approximate cost
  - components: €[TBD]
  - PCB: €4 (ordered as prototype board)
  - chassis: €4-10 (when ordered, depends on material, etc)
- - top plate: €4 (can be combined with the main PCB)
+ - top plate: €0-4 (can be combined with the main PCB)
 
 See [BOM][dw_bom_v2_0] for complete component list.
 
