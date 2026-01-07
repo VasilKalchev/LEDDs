@@ -31,8 +31,8 @@ fp-info-cache
 **/export/*.svg
 
 ## exported BOM files
-**/export/bom.*
-**/export/ibom.html
+# **/export/bom.*
+# **/export/ibom.html
 
 ## exported gerbers
 **/export/gerbers*
@@ -41,6 +41,7 @@ fp-info-cache
 
 ## exported models
 **/export/*.step
+**/export/*.stl
 
 
 # ESPHome

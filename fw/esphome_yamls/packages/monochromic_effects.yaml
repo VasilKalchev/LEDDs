@@ -1,0 +1,45 @@
+- pulse:
+    name: "Pulse (low, fast)"
+    transition_length: 4s
+    update_interval: 4s
+    min_brightness: 1%
+    max_brightness: 50%
+- pulse:
+    name: "Pulse (low, slow)"
+    transition_length: 7s
+    update_interval: 7s
+    min_brightness: 1%
+    max_brightness: 50%
+- pulse:
+    name: "Pulse (high, fast)"
+    transition_length: 4s
+    update_interval: 4s
+    min_brightness: 50%
+    max_brightness: 100%
+- pulse:
+    name: "Pulse (high, slow)"
+    transition_length: 7s
+    update_interval: 7s
+    min_brightness: 50%
+    max_brightness: 100%
+- pulse:
+    name: "Pulse (full, fast)"
+    transition_length: 3s
+    update_interval: 3s
+    min_brightness: 1%
+    max_brightness: 100%
+- pulse:
+    name: "Pulse (full, slow)"
+    transition_length: 10s
+    update_interval: 10s
+    min_brightness: 1%
+    max_brightness: 100%
+
+- flicker:
+    name: "Flicker (soft)"
+    alpha: 85%
+    intensity: 3%
+- flicker:
+    name: "Flicker (intense)"
+    alpha: 85%
+    intensity: 4%
