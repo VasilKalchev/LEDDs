@@ -119,7 +119,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 Approximate cost
  - components: €[TBD]
  - PCB: €4 (ordered as prototype board)
- - chassis: €4-10 (when ordered, depends on material, etc)
+ - chassis: €4-10 (when ordered)
  - top plate: €0-4 (can be combined with the main PCB)
 
 See [BOM][dw_bom_v2_0] for complete component list.
@@ -128,7 +128,7 @@ See [BOM][dw_bom_v2_0] for complete component list.
 ## :hammer: Build
 ### Prerequisites
 - Skills: soldering [^2], experience with mains electricity.
-- Tools: soldering iron, hot air gun (optional), 3D printer or access to 3D printing service, multimeter.
+- Tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter.
 
 ### 1. Ordering the components
   - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
@@ -193,13 +193,13 @@ Solder R12 and header J4, use a USB to serial adapter.
 - Connect to the board via USB-C
 - Visit [ESPHome web flasher](https://web.esphome.io/)
 - Upload one of the provided binaries:
-	- [full.bin][dw_full_bin_v2_0]: Home Assistant + rotary encoder
+	- [hass.bin][dw_hass_bin_v2_0]: Home Assistant + rotary encoder
 	- [web_server.bin][dw_web_server_bin_v2_0]: self hosted web server + rotary encoder
 	- [standalone][dw_standalone_bin_v2_0]: rotary encoder only
 - Set your Wi-Fi credentials using the ESPHome web flasher
 - Test before wiring
 
-For further customization, the YAML configurations used for creating these binaries are located in [/fw/yaml/][/fw/yaml/].
+For further customization, the YAML configurations used for creating these binaries are located in [/fw/yaml/](/fw/esphome_yamls/).
 
 ### 4. Preparing the enclosure
 - Plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron.
@@ -217,18 +217,19 @@ For further customization, the YAML configurations used for creating these binar
 ## Usage
 ### Control
 **Directly:**
-*The rotary encoder is available in all firmware binaries. It's useful for conveniently controlling the device.*
+> *Available in all firmware binaries.*
+> It's useful for conveniently controlling the device.
 
  - **press**: on/off
  - **rotate**: brightness adjustment
  - **press + rotate**: cycle lighting effects
 
 **Home Assistant:**
-*Included in [hass.bin].*
+> *Included in [hass.bin].*
 
 Integrating the device in Home Assistant: (https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant).
 
-[hass_ui_screenshot.png]
+![Screenshot of the device in Home Assistant][hass_ui_screenshot]
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
@@ -238,10 +239,11 @@ The "Configuration" section allows customization of the device:
  - **Transition length**: How fast the bulb changes brightness in milliseconds.
  - **LED: red/blue/white**: set the ambient brightness of the LEDs.
 
-**Web UI:**
-*Included in [web_server.bin]. This is useful if you don't have Home Assistant, but want to control the device remotely.*
+**Web server:**
+> *Included in [web_server.bin].*
+> This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-[web_server_ui_screenshot.png]
+![web_server_ui_screenshot]
 
 ### LED indicators
 There are three LEDs on the board:
@@ -252,6 +254,22 @@ There are three LEDs on the board:
 ### Default light effects
 Light effects can be cycled with the rotary encoder or chosen directly from a UI.
 
+<div>
+<p align="center">
+  <img src="/doc/assets/effect-pulse_low_fast.gif" alt="" title="Pulse (low, fast)" width="25%" />
+  <img src="/doc/assets/effect-pulse_low_slow.gif" alt="" title="Pulse (low, slow)" width="25%" />
+  <img src="/doc/assets/effect-pulse_high_fast.gif" alt="" title="Pulse (high, fast)" width="25%" />
+  <img src="/doc/assets/effect-pulse_high_slow.gif" alt="" title="Pulse (high, slow)" width="25%" />
+</p>
+<p align="center">
+  <img src="/doc/assets/effect-pulse_full_fast.gif" alt="" title="Pulse (full, fast)" width="25%" />
+  <img src="/doc/assets/effect-pulse_full_slow.gif" alt="" title="Pulse (full, slow)" width="25%" />
+  <img src="/doc/assets/effect-flicker_soft.gif" alt="" title="Flicker (soft)" width="25%" />
+  <img src="/doc/assets/effect-flicker_intense.gif" alt="" title="Flicker (intense)" width="25%" />
+</p>
+</div>
+
+<!-- checklist
 1. **Pulse (low, fast)**: pulsing at low brightness, quickly
 2. **Pulse (low, slow)**: pulsing at low brightness, slowly
 3. **Pulse (high, fast)**: pulsing at high brightness, quickly
@@ -260,6 +278,7 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 6. **Pulse (full, slow)**: pulsing from low to high brightness, slowly
 7. **Flicker (soft)**: soft flicker, imitating candle light
 8. **Flicker (intense)**: intense flicker, imitating candle light
+-->
 
 
 ## Versions, releases and compatibility
@@ -316,11 +335,14 @@ This project is licensed under the **MIT License**.
 [dw_bom_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/bom.csv "bom.csv from release v2.0"
 [dw_ibom_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html "ibom.html from release v2.0"
 
-[dw_full_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/full.bin "full.bin from release v2.0"
+[dw_hass_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/hass.bin "full.bin from release v2.0"
 [dw_web_server_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/web_server.bin "web_server.bin from release v2.0"
 [dw_standalone_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/standalone.bin "standalone.bin from release v2.0"
 	
 [discussions_show_and_tell]: https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell
+
+[hass_ui_screenshot]: 
+[web_server_ui_screenshot]: 
 
 <!-- /links -->
 
