@@ -315,6 +315,26 @@ The procedure is:
 - commit
 - pull request
 
+```mermaid
+gitGraph
+    commit tag: "v1.0"
+    branch improve_x
+    checkout improve_x
+    commit id: "Improve x"
+    commit id: "Re-generate exports"
+    commit id: "Update board documentation"
+    checkout main
+    merge improve_x tag: "v1.1"
+    branch replace_y
+    checkout replace_y
+    commit id: "Replace y"
+    commit id: "Generate exports"
+    commit id: "Compile binaries"
+    commit id: "Update all documentation"
+    checkout main
+    merge replace_y tag: "v2.0"
+```
+
 You're welcome to post photos in [Discussions: Show and tell][discussions_show_and_tell].
 
 ## License

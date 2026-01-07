@@ -2,8 +2,15 @@
 substitutions:
   device_friendly_name: "LEDDs 2"
   
-  # config
+  # user configuration
+  dim_step: 6.25 %  # 10 % | 6.25 %
+  gamma_correct: 2.2
+  minimum_level: 15 %
+  restore_mode: LIGHT_ALWAYS_OFF  # LIGHT_ALWAYS_OFF | LIGHT_ALWAYS_ON
+  transition_length: 300 ms
+  
   feedback_blink_length: 40 ms
+
   update_period_default: 180 s
 
   # IDs
@@ -29,36 +36,9 @@ esphome:
   name: "ledds2"
   friendly_name: ${device_friendly_name}
   comment: "trailing edge dimmer"
-  name_add_mac_suffix: true
   project:
     name: "VasilKalchev.LEDDs"
     version: "2.0"
-  on_boot:
-    - priority: 0
-      then:
-        - output.set_min_power:
-            id: ${ac_dimmer_id}
-            min_power: !lambda "return (float)id(minimum_power_input).state / 100.0f;"
-
-        - lambda: |-
-            id(${light_id}).set_default_transition_length( id(default_transition_length_input).state );
-
-        - lambda: |-
-            id(${light_id}).set_gamma_correct( id(gamma_correct_input).state );
-
-        - lambda: |-
-            std::string option = id(restore_mode_input).current_option();
-
-            LightRestoreMode res_mode = LIGHT_ALWAYS_OFF;
-            if (option == "Off") {
-              res_mode = LIGHT_ALWAYS_OFF;
-              id(${light_id}).turn_off().perform(); // redundant because light's restore_mode is set to ALWAYS_OFF
-            } else if (option == "On") {
-              res_mode = LIGHT_ALWAYS_ON;
-              id(${light_id}).turn_on().perform();
-            } else {
-              id(${light_id}).turn_off().perform();
-            }
 
 logger:
     level: WARN  # NONE < ERROR < WARN < INFO < DEBUG < VERBOSE < VERY_VERBOSE
@@ -69,16 +49,6 @@ esp32:
   framework:
     type: arduino
     version: recommended
-
-wifi:
-  ap:
-
-captive_portal:
-
-improv_serial:
-  next_url: https://github.com/VasilKalchev/LEDDs/tree/v2.0
-
-api:
 
 ota:
   platform: esphome
@@ -100,41 +70,10 @@ light:
     name: "Bulb"
     output: ${ac_dimmer_id}
     icon: "mdi:lightbulb-variant"
-    default_transition_length: 300 ms
-    gamma_correct: 2.2
-    restore_mode: ALWAYS_OFF
+    default_transition_length: ${transition_length}
+    gamma_correct: ${gamma_correct}
+    restore_mode: ${restore_mode}
     effects: !include packages/monochromic_effects.yaml
-    on_state:
-      - sensor.template.publish:
-          id: power_draw_est
-          state: !lambda |-
-            const float quiescent_pwr_draw = 0.3;
-
-            std::string effect_name = id(${light_id}).get_effect_name();
-            float mult = 0.0;
-
-            if (effect_name == "Pulse (low, fast)") {
-                mult = 0.2;
-            } else if (effect_name == "Pulse (low, slow)") {
-                mult = 0.2;
-            } else if (effect_name == "Pulse (high, fast)") {
-                mult = 0.8;
-            } else if (effect_name == "Pulse (high, slow)") {
-                mult = 0.8;
-            } else if (effect_name == "Pulse (full, fast)") {
-                mult = 0.5;
-            } else if (effect_name == "Pulse (full, slow)") {
-                mult = 0.5;
-            } else {  // flicker
-                float brightness = id(${light_id}).remote_values.get_brightness();
-                float gamma_correct = id(${light_id}).get_gamma_correct();
-
-                id(${light_id}).remote_values.as_brightness(&brightness, gamma_correct);
-                mult = std::acos(1 - (2 * brightness)) / 3.14159;  // RMS power compensation
-            }
-
-            ESP_LOGV("light", "Multiplier: %0.4f; bulb power rating: %0.4f", mult, id(bulb_power_rating_input).state);
-            return (mult * id(bulb_power_rating_input).state) + quiescent_pwr_draw;
 
   - platform: monochromatic
     id: red_led
@@ -205,7 +144,7 @@ sensor:
                   condition: !lambda 'return id(${light_id}).remote_values.get_brightness() < 1.0;'
               - light.dim_relative:
                   id: ${light_id}
-                  relative_brightness: 6.25 %  # 10 % | 6.25 %
+                  relative_brightness: ${dim_step}
                   transition_length: 0 ms
             else:
               - script.execute:
@@ -226,7 +165,7 @@ sensor:
                   condition: !lambda 'return id(${light_id}).remote_values.get_state() > 0.0;'
               - light.dim_relative:
                   id: ${light_id}
-                  relative_brightness: -6.25 %  # -10 % | -6.25 %
+                  relative_brightness: -1 * ${dim_step}
                   transition_length: 0 ms
             else:
               - script.execute:
@@ -235,17 +174,6 @@ sensor:
               - script.execute:
                   id: walk_effects
                   forward: false
-
-  - platform: template
-    id: power_draw_est
-    name: "Power [est]"
-    unit_of_measurement: "W"
-    device_class: power
-    state_class: measurement
-    icon: "mdi:flash"
-    accuracy_decimals: 1
-    update_interval: never
-
 
 binary_sensor:
   - platform: gpio
@@ -266,134 +194,6 @@ binary_sensor:
       then:
         - light.toggle:
             id: ${light_id}
-
-### Configuration ---
-
-
-number:
-  - platform: template
-    id: default_transition_length_input
-    name: "Transition length"
-    icon: "mdi:clock-start"
-    entity_category: config
-    unit_of_measurement: ms
-    mode: auto
-    device_class: duration
-    min_value: 0
-    max_value: 3000
-    step: 100
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 300
-    set_action:
-      - lambda: |-
-          id(${light_id}).set_default_transition_length(x);
-
-  - platform: template
-    id: minimum_power_input
-    name: "Minimum level"
-    icon: "mdi:lightbulb-on-10"
-    entity_category: config
-    unit_of_measurement: "%"
-    mode: auto
-    min_value: 0
-    max_value: 99
-    step: 1
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 0
-    set_action:
-      - output.set_min_power:
-          id: ${ac_dimmer_id}
-          min_power: !lambda "return (float)x / 100.0f;"
-      - light.turn_on:
-          id: ${light_id}
-          brightness: 1 %
-          transition_length: 0 s
-
-  - platform: template
-    id: gamma_correct_input
-    name: "Gamma correct"
-    icon: "mdi:gamma"
-    entity_category: config
-    mode: auto
-    min_value: 0.5
-    max_value: 4
-    step: 0.25
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 2.2
-    set_action:
-      - lambda: |-
-          id(${light_id}).set_gamma_correct(x);
-      - light.turn_on:
-          id: ${light_id}
-
-  - platform: template
-    id: bulb_power_rating_input
-    name: "Bulb power rating"
-    icon: "mdi:flash"
-    entity_category: config
-    unit_of_measurement: "W"
-    mode: box
-    device_class: power
-    min_value: 0.5
-    max_value: 200
-    step: 0.1
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 5
-
-
-select:
-  - platform: template
-    id: restore_mode_input
-    name: "Restore mode"
-    icon: "mdi:backup-restore"
-    entity_category: config
-    options:
-      - "Off"
-      - "On"
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_option: "Off"
-    set_action:
-      - lambda: |-
-          std::string option = x.c_str();
-
-          LightRestoreMode res_mode = LIGHT_ALWAYS_OFF;
-          if (option == "Off") {
-            res_mode = LIGHT_ALWAYS_OFF;
-          } else if (option == "On") {
-            res_mode = LIGHT_ALWAYS_ON;
-          } else {
-            ESP_LOGW("select", "Unknown select option: %s\n", option);
-          }
-
-          ESP_LOGV("main", "Restore mode index: %d\n", res_mode);
-
-### Configuration ---
-
-
-button:
-  - platform: restart
-    name: "Restart"
-    entity_category: config
-    device_class: restart
-
-text_sensor:
-  - platform: version
-    name: "ESPHome version"
-    hide_timestamp: true
-
-  - platform: debug
-    reset_reason:
-      name: "Reset reason"
 
 
 power_supply:
@@ -419,7 +219,7 @@ output:
     method: trailing
     init_with_half_cycle: true
     zero_means_zero: true
-    min_power: 0 %
+    min_power: ${minimum_level}
     max_power: 100 %
     power_supply: ac_live
 
