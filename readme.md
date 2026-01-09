@@ -54,6 +54,8 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 * smoother dimming with reduced flicker
 * lower minimum brightness levels
 
+> The schematic and PCB can be [viewed](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2FVasilKalchev%2FLEDDs%2Ftree%2Fv2.0%2Fhw) online using to KiCanvas.
+
 ## :star: Features
 - **ESP32-C3** based with ESPHome firmware for integration with Home Assistant.
 - **Standalone** operation, doesn't require Home Assistant.
