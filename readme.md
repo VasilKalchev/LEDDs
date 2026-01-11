@@ -119,7 +119,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ---
 ## :euro: Bill of materials
 Approximate cost
- - components: €[TBD]
+ - components: ~€15
  - PCB: €4 (ordered as prototype board)
  - chassis: €4-10 (when ordered)
  - top plate: €0-4 (can be combined with the main PCB)
