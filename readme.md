@@ -36,12 +36,12 @@ The project consists of a PCB, a 3D-printable chassis, and a top plate designed 
    * [3. Flashing the firmware](#3-flashing-the-firmware)
    * [4. Preparing the enclosure](#4-preparing-the-enclosure)
    * [5. Final assembly](#5-final-assembly)
-* [Usage](#usage)
+* [Usage](#bulb-usage)
    * [Control](#control)
    * [LED indicators](#led-indicators)
    * [Default light effects](#default-light-effects)
-* [Versions, releases and compatibility](#versions-releases-and-compatibility)
-* [Contributing](#contributing)
+* [Versions, releases and compatibility](#page_with_curl-versions-releases-and-compatibility)
+* [Contributing](#coffee-contributing)
 * [License](#license)
 
 ---
@@ -83,7 +83,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ---
 
 ## Release/fabrication of v2.0
-![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
+![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
 
 > The fabricated board from release v2.0 works; it has a few minor issues: [releaselog.md v2.0][releaselog_v2_0].
 > 
@@ -145,9 +145,11 @@ See [BOM][dw_bom_v2_0] for complete component list.
 ### 2. PCB assembly instructions
 Use the [interactive BOM][dw_ibom_v2_0] to solder the components.
 
-<p align=center>
+[![download ibom.html](doc/assets/ibom_screenshot_720p.png)](https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html)
+
+<!--<p align=center>
   <img src="doc/assets/ibom_screenshot_720p.png" href="https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html" alt="interactive BOM screenshot" title="iBOM" width="75%" />
-</p>
+</p>-->
 
 #### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
@@ -220,7 +222,7 @@ For further customization, the YAML configurations used for creating these binar
  - Screw the top plate through the PCB into the chassis.
 
 
-## Usage
+## :bulb: Usage
 ### Control
 **Directly:**
 > *Available in all firmware binaries.*
@@ -235,7 +237,7 @@ For further customization, the YAML configurations used for creating these binar
 
 Integrating the device in Home Assistant: (https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant).
 
-![Screenshot of the device in Home Assistant](docs/assets/hass_screenshot.png)
+![Screenshot of the device in Home Assistant](doc/assets/hass_screenshot.png)
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
@@ -249,7 +251,7 @@ The "Configuration" section allows customization of the device:
 > *Included in [web_server.bin].*
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-![web_server_ui_screenshot](docs/assets/web_server_screenshot.png)
+![web_server_ui_screenshot](doc/assets/web_server_screenshot.png)
 
 ### LED indicators
 There are three LEDs on the board:
@@ -287,7 +289,7 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 -->
 
 
-## Versions, releases and compatibility
+## :page_with_curl: Versions, releases and compatibility
 Each fabrication run results in a **GitHub release**.
 - Semantic versioning (major.minor), no patch versions
 - **PCB, chassis, and top plate are versioned independently**
@@ -306,7 +308,7 @@ enclosure/
 ```
 
 
-## Contributing
+## :coffee: Contributing
 Every type of contribution is welcome, like improvements or corrections on the:
 - schematic/PCB design
 - documentation
