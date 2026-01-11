@@ -83,37 +83,37 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ---
 
 ## Release/fabrication of v2.0
-![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
+![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release v2.0 works, but has some minor issues: [releaselog.md v2.0][releaselog_v2_0].
+> The fabricated board from release v2.0 works; it has a few minor issues: [releaselog.md v2.0][releaselog_v2_0].
 > 
-> :tada: Recommended for fabrication!
+> :memo: Recommended for fabrication!
 
 ---
 
 ## :open_file_folder: Repository structure
 ```
-├── hw/                     # KiCad PCB designs
-│   ├── lib/                # symbols and footprints
-│   ├── assets/             # fonts and graphics
-│   └── export/             # scripts for exporting gerbers, BOM and schematics/PCB PDFs
-├── fw/                     # ESPHome YAML configurations and firmware binaries
-├── doc/                    # additional documentation
-│   ├── releaselog.md       # main PCB release log
-│   ├── changelog.md        # main PCB change log
+├── hw/                       # KiCad PCB designs
+│   ├── lib/                  # symbols and footprints
+│   ├── assets/               # fonts and graphics
+│   └── export/               # scripts for exporting gerbers, BOM and schematics/PCB PDFs
+├── fw/                       # ESPHome YAML configurations and firmware binaries
+├── doc/                      # additional documentation
+│   ├── releaselog.md         # main PCB release log
+│   ├── changelog.md          # main PCB change log
 │   └── conventions.md
 ├── enclosure/
-│   ├── chassis/            # 3D printable chassis
-│   │   ├── releaselog.md   # chassis release log
-│   │   ├── changelog.md    # chassis change log
+│   ├── chassis/              # 3D printable chassis
+│   │   ├── releaselog.md     # chassis release log
+│   │   ├── changelog.md      # chassis change log
 │   │   ├── vX.Y-variant_a/
 │   │   └── vX.Y-variant_b/
-│   └── top_plate/          # top plate design
-│       ├── releaselog.md   # top plate release log
-│       ├── changelog.md    # top plate change log
+│   └── top_plate/            # top plate design
+│       ├── releaselog.md     # top plate release log
+│       ├── changelog.md      # top plate change log
 │       ├── vX.Y-variant_a/
 │       └── vX.Y-variant_b/
-└── img/                    # photos and renders
+└── img/                      # photos and renders
 ```
 
 ---
@@ -144,6 +144,10 @@ See [BOM][dw_bom_v2_0] for complete component list.
 
 ### 2. PCB assembly instructions
 Use the [interactive BOM][dw_ibom_v2_0] to solder the components.
+
+<p align=center>
+  <img src="doc/assets/ibom_screenshot_720p.png" href="https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html" alt="interactive BOM screenshot" title="iBOM" width="75%" />
+</p>
 
 #### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
@@ -231,7 +235,7 @@ For further customization, the YAML configurations used for creating these binar
 
 Integrating the device in Home Assistant: (https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant).
 
-![Screenshot of the device in Home Assistant][hass_ui_screenshot]
+![Screenshot of the device in Home Assistant](docs/assets/hass_screenshot.png)
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
@@ -245,7 +249,7 @@ The "Configuration" section allows customization of the device:
 > *Included in [web_server.bin].*
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-![web_server_ui_screenshot]
+![web_server_ui_screenshot](docs/assets/web_server_screenshot.png)
 
 ### LED indicators
 There are three LEDs on the board:
@@ -271,7 +275,7 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 </p>
 </div>
 
-<!-- checklist
+<!--
 1. **Pulse (low, fast)**: pulsing at low brightness, quickly
 2. **Pulse (low, slow)**: pulsing at low brightness, slowly
 3. **Pulse (high, fast)**: pulsing at high brightness, quickly
