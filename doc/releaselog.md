@@ -1,19 +1,39 @@
 # Release log
-Fabrication results.
 
 
 ## v2.0 - 2025-04-02
-![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
+### Hightlights
+ - Switched MCU module to **ESP32-C3-12F**.
+ - Added **USB-C** port for programming.
 
-> The fabricated board from release v2.0 works, but has some minor issues.
+### Changes
+ - Replaced module ESP-12 (ESP8266) with module ESP32-C3-12F (ESP32-C3).
+ - Added USB-C.
+ - Added 3.3 V linear regulator for powering the MCU through the USB only.
+ - PCB layout adjustments.
+
+### Compatibility notes
+ - Older enclosures (chassis and top plate) from v1.y are not compatible with the new PCB.
+ - UART header remains available, but the auto-programming circuit is removed.
+
+### Upgrade impact
+ - Firmware must target ESP32-C3.
+ - Devices can be programmed directly over USB-C.
+
+
+![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
+
+> The fabricated board from release vX.Y works; it has a few known minor issues.
 >
 > :memo: Recommended for fabrication!
 
-### Properties:
+### Fabbrication properties:
+> *Important parameters are bolded.*
+
  - Fabricator: JLCPCB
- - Material: FR4 (Tg 135)
+ - **Material: FR4 (Tg 135)**
  - Layers: 2
- - PCB thickness: 1 mm
+ - **PCB thickness: 1 mm**
  - Solder mask color: white
  - Silkscreen: black
  - Surface finish: HASL (with lead)
@@ -23,9 +43,12 @@ Fabrication results.
  - Appearance quality: IPC Class 2 Standard
  - Silkscreen technology: Ink-jet/screen printing
 
-### Problems
+### Issues
 #### Minor
  - red LED is only visible from one side
+
+
+---
 
 
 ## v1.0 - 2025-02-17
@@ -35,11 +58,13 @@ Fabrication results.
 >
 > :grey_exclamation: Obsolete.
 
-### Properties:
+### Fabrication properties:
+> *Important parameters are bolded.*
+
  - Fabricator: JLCPCB
- - Material: FR4 (Tg 135)
+ - **Material: FR4 (Tg 135)**
  - Layers: 2
- - PCB thickness: 1 mm
+ - **PCB thickness: 1 mm**
  - Solder mask color: white
  - Silkscreen: black
  - Surface finish: HASL (with lead)
@@ -49,7 +74,7 @@ Fabrication results.
  - Appearance quality: IPC Class 2 Standard
  - Silkscreen technology: Ink-jet/screen printing
 
-### Problems:
+### Issues
 #### Minor
  - ESP8266 is an obsolete MCU
  - R14/15/18/19 have non-standard values
@@ -70,16 +95,16 @@ Fabrication results.
 
  - [ ] FW
 
- - [ ] add version with changes to [/doc/changelog.md](/doc/changelog.md)
- - [ ] add version with fabrication result to [/doc/releaselog.md](/doc/releaselog.md)
+ - [x] add version with changes to [/doc/changelog.md](/doc/changelog.md)
+ - [x] add version with fabrication result to [/doc/releaselog.md](/doc/releaselog.md)
 
- - [ ] use the scripts in [/hw/export/] to generate "release" files locally
+ - [ ] use the scripts in [/hw/export/] to generate "release" files
  - [ ] complete [/doc/assets/readme/readme.md](/doc/assets/readme/readme.md) checklist
  - [ ] complete [/readme.md](/readme.md) checklist
 
- - [ ] mark older boards of this major version as obsolete (in [/doc/releaselog.md](/doc/releaselog.md) and in repository releases)
+ - [x] mark older boards of this major version as obsolete (in [/doc/releaselog.md](/doc/releaselog.md) and in repository releases)
 
- - [ ] delete [/hw/project_checklist.md](/hw/project_checklist.md)
+ - [x] delete [/hw/project_checklist.md](/hw/project_checklist.md)
 
 
 List of checklists inside the repository:
@@ -93,12 +118,10 @@ List of checklists inside the repository:
 -->
 
 
-<!-- release assessment template -->
+<!-- release assessment templates
 
 <details>
 <summary>release assessment templates</summary>
-
-## "Fabrication result" section:
 
 ![bad fabrication](https://img.shields.io/badge/bad-firebrick?style=for-the-badge&label=Release/fabrication%20result)
 > The fabricated board from release vX.Y doesn't work: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
@@ -123,18 +146,24 @@ List of checklists inside the repository:
 
 ![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release vX.Y works, but has some minor issues: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
+> The fabricated board from release vX.Y works; it has some minor issues: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
 >
-> :memo: Recommended for fabrication!
-> :grey_exclamation: Obsolete.
+> :memo: Recommended for fabrication! | :grey_exclamation: Obsolete!
+
+---
+
+![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
+
+> The fabricated board from release vX.Y works; it has a few known minor issues: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
+>
+> :memo: Recommended for fabrication! | :grey_exclamation: Obsolete!
 
 ---
 
 ![great fabrication](https://img.shields.io/badge/great-limegreen?style=for-the-badge&label=Release/fabrication%20result)
 > The fabricated board from release vX.Y works without any known issues!
 >
-> :tada: Recommended for fabrication!
-> :grey_exclamation: Obsolete.
+> :tada: Recommended for fabrication! | :grey_exclamation: Obsolete!
 
 ---
 
