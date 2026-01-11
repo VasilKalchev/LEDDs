@@ -21,7 +21,7 @@
  - Devices can be programmed directly over USB-C.
 
 
-![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
+![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
 
 > The fabricated board from release vX.Y works; it has a few minor issues.
 >
