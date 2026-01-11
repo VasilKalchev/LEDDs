@@ -23,17 +23,15 @@
 
 ![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release vX.Y works; it has a few known minor issues.
+> The fabricated board from release vX.Y works; it has a few minor issues.
 >
 > :memo: Recommended for fabrication!
 
 ### Fabbrication properties:
-> *Important parameters are bolded.*
-
  - Fabricator: JLCPCB
- - **Material: FR4 (Tg 135)**
+ - Material: FR4 (Tg 135)
  - Layers: 2
- - **PCB thickness: 1 mm**
+ - **PCB thickness: 1 mm** [^1]
  - Solder mask color: white
  - Silkscreen: black
  - Surface finish: HASL (with lead)
@@ -52,19 +50,23 @@
 
 
 ## v1.0 - 2025-02-17
+
+<p align="center">
+  <img src="https://github.com/VasilKalchev/LEDDs/blob/93d31402db485d9abf524c4a871a87e788e3d957/doc/assets/pcb-assembled_front_red_720p.jpg" alt="PCB - assembled, front" title="PCB - assembled, side" width="49%" />
+  <img src="https://github.com/VasilKalchev/LEDDs/blob/93d31402db485d9abf524c4a871a87e788e3d957/doc/assets/enclosure-assembled_side_red_720p.jpg" alt="Enclosure - assembled, side" title="Enclosure - assembled, side" width="49%" />
+</p>
+
 ![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release v1.0 works, but has some minor issues.
+> The fabricated board from release v1.0 works; it has some minor issues.
 >
 > :grey_exclamation: Obsolete.
 
 ### Fabrication properties:
-> *Important parameters are bolded.*
-
  - Fabricator: JLCPCB
- - **Material: FR4 (Tg 135)**
+ - Material: FR4 (Tg 135)
  - Layers: 2
- - **PCB thickness: 1 mm**
+ - **PCB thickness: 1 mm** [^1]
  - Solder mask color: white
  - Silkscreen: black
  - Surface finish: HASL (with lead)
@@ -82,6 +84,9 @@
  - silkscreen with GitHub link is barely readable
  - relay pins cutouts are very close to the edge of the board
  - GPIO2 is connected to both led_1 and ESP-12's on-board LED
+
+
+[^1]: Important for fit with the height of the chassis and the length of the spacers.
 
 
 <!-- checklist
@@ -154,7 +159,7 @@ List of checklists inside the repository:
 
 ![very good fabrication](https://img.shields.io/badge/very%20good-lime?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release vX.Y works; it has a few known minor issues: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
+> The fabricated board from release vX.Y works; it has a few minor issues: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
 >
 > :memo: Recommended for fabrication! | :grey_exclamation: Obsolete!
 
