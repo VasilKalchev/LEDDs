@@ -150,6 +150,12 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 [![download ibom.html](doc/assets/ibom_screenshot_720p.png)][dw_ibom_v2_0]
 
 
+[![download ibom.html](doc/assets/ibom_screenshot_720p.png)](https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html)
+
+<!--<p align=center>
+  <img src="doc/assets/ibom_screenshot_720p.png" href="https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html" alt="interactive BOM screenshot" title="iBOM" width="75%" />
+</p>-->
+
 #### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
 - solder R13
@@ -277,7 +283,22 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 </p>
 </div>
 
+<<<<<<< HEAD
 
+=======
+<!--
+1. **Pulse (low, fast)**: pulsing at low brightness, quickly
+2. **Pulse (low, slow)**: pulsing at low brightness, slowly
+3. **Pulse (high, fast)**: pulsing at high brightness, quickly
+4. **Pulse (high, slow)**: pulsing at high brightness, slowly
+5. **Pulse (full, fast)**: pulsing from low to high brightness, quickly
+6. **Pulse (full, slow)**: pulsing from low to high brightness, slowly
+7. **Flicker (soft)**: soft flicker, imitating candle light
+8. **Flicker (intense)**: intense flicker, imitating candle light
+-->
+
+
+>>>>>>> 648be4c1f23fc76b2fbfe85cbffa6efefbed2b19
 ## :page_with_curl: Versions, releases and compatibility
 Each fabrication run results in a **GitHub release**.
 - Semantic versioning (major.minor), no patch versions
