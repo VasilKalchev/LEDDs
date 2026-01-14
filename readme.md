@@ -79,8 +79,9 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 [^1]: Also compatible with ESP8266 ESP-12F, but not recommended.
 
-> [!IMPROTANT]
+> [!IMPORTANT]
 > Designed for 230 VAC at 50 Hz.
+>
 > Usage with 120 VAC at 60 Hz will possibly require adjusting component values of the zero-cross and the voltage regulator circuits.
 
 ---
@@ -88,7 +89,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ## Release/fabrication of v2.0
 ![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release v2.0 works; it has a few minor issues: [releaselog.md v2.0][releaselog_v2_0].
+> The fabricated board from release v2.0 works; it has a few minor issues: [/doc/releaselog.md v2.0][releaselog_v2_0].
 > 
 > :memo: Recommended for fabrication!
 
@@ -125,42 +126,48 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
  - top plate: €0-4 (can be combined with the main PCB)
  - chassis: €4-10 (when ordered)
 
-[Download the BOM][dw_bom_v2_0] for complete components list.
+Check out the BOM provided in the release bundle for complete components list.
 
 
 ## :hammer: Build
 ### Prerequisites
-- skills: soldering [^2], experience with mains electricity.
-- tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter.
+- skills: soldering [^2], experience with mains electricity
+- tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter
 
-[^2]: Hardest component is the USB-C port. The board can be ordered pre-assembled.
+[^2]: Trickiest part is the USB-C port. The board can be ordered pre-assembled.
+
+[Download][dw_release_bundle_v2_0] the release bundle.
 
 ### 1. Ordering the components
   - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
-    - **gerbers** for JLCPCB: [main board], [top plate]
-    - for other fabricators - use KiCad to generate gerbers according to the manufacturers instructions
-    - see the [release log.md](/docs/releaselog.md) for tested board properties
-   - **top plate**: select a top plate from [/enclosure/top_plate/](/enclosure/top_plate/).
-   - **chassis**: select a chassis from [/enclosure/chassis/](/enclosure/chassis/).
+    - gerbers for JLCPCB: available in the bundle
+    - for other fabricators - use KiCad to generate gerbers according to the manufacturer's instructions
+    See the [/doc/releaselog.md](/doc/releaselog.md) for tested board properties
+
+  - **chassis**: STL files are available in the bundle
 
 ### 2. PCB assembly instructions
 > [!TIP]
-> Download the [interactive BOM][dw_ibom_v2_0] to solder the components.
+> Use the provided **interactive BOM** for soldering the components.
 
-[![download ibom.html](doc/assets/ibom_screenshot_720p.png)][dw_ibom_v2_0]
-
-
-[![download ibom.html](doc/assets/ibom_screenshot_720p.png)](https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html)
+![ibom preview](/doc/assets/ibom_screenshot_720p.png)
 
 <!--<p align=center>
   <img src="doc/assets/ibom_screenshot_720p.png" href="https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html" alt="interactive BOM screenshot" title="iBOM" width="75%" />
 </p>-->
 
-#### Microcontroller module
+#### Components choices
+
+##### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
+
+![esp32-c3-12f](/doc/assets/assembly/esp32-c3-12f.jpg)
+
 - solder R13
 
-<details><summary><strong>ESP8266 ESP-12F (not recommended)</strong></summary>
+<details><summary>*ESP8266 ESP-12F (not recommended)*</summary>
+
+![esp-12f](/doc/assets/assembly/esp-12f.jpg)
 
 - solder JP2
 - don't solder R13
@@ -172,48 +179,60 @@ ESP8266 doesn't support native USB and requires an external USB to serial adapte
 
 </details>
 
-#### Zero-cross optoisolator
+##### Zero-cross optoisolator
 The PCB has footprints for a choice between 2 optoisolators that connect the zero-cross signal to the MCU.
 
-<strong>H11L1SR2M</strong>
+**H11L1SR2M**
+
+![h11l1](/doc/assets/assembly/h11l1.jpg)
+
  - solder the optoisolator on footprint U4
  - solder C13
  - don't solder R23
 
-<details><summary>PC817XI (not recommended)</summary>
+<details><summary>--PC817XI (not recommended)--</summary>
+
+![pc817](/doc/assets/assembly/pc817.jpg)
 
 - solder the optoisolator on footprint U3
 - solder R23
 - no need to solder C13
 
-This optoisolator is the same as the one used for controlling the MOSFET's gate, but didn't produce good results in my testing.
+This optoisolator is the same as the one used for controlling the MOSFET's gate, but didn't work good for the zero-cross circuit.
 
 </details>
 
-#### Skipping the relay
-The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature, but can be omitted:
+##### Skipping the relay
+The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature and can be omitted.
+
+![relay](/doc/assets/assembly/relay.jpg)
+
  - don't solder K1, C3, D2, R2 and Q1
  - use a wire to short pin 11 to 14
  - use a wire to short pin 21 to 24
 
-#### Skipping the rotary encoder
+##### Skipping the rotary encoder
 If the rotary encoder is not required, there is no need to solder R3, R4, C4, C5 and C6. Optionally a push button (SW2) can be soldered so boot mode can be entered manually.
+A modified top plate (without a hole in the middle) is recommended for safety reasons (not currently available).
 
-#### Using the UART header instead of the USB for programming *(not tested)*
+![boot_button](/doc/assets/assembly/boot_button.jpg)
+
+##### Using the UART header instead of the USB for programming *(not tested)*
 Solder R12 and header J4, use a USB to serial adapter.
 
+![uart](/doc/assets/assembly/uart.jpg)
+
 ### 3. Flashing the firmware
-- Connect to the board via USB-C
-- Visit [ESPHome web flasher](https://web.esphome.io/)
-- Upload one of the provided binaries:
-	- [hass.bin][dw_hass_bin_v2_0]: Home Assistant + rotary encoder
-	- [web_server.bin][dw_web_server_bin_v2_0]: self hosted web server + rotary encoder
-	- [standalone][dw_standalone_bin_v2_0]: rotary encoder only
-- Set your Wi-Fi credentials using the ESPHome web flasher
-- Test before wiring
+ - Connect to the board via USB-C.
+ - Use [ESPHome's web flasher](https://web.esphome.io/) to upload one of the provided firmware binaries.
+   - hass.bin: Home Assistant + rotary encoder
+   - web_server.bin: self hosted web server + rotary encoder
+   - standalone: rotary encoder only
+ - Set your Wi-Fi credentials using the ESPHome web flasher.
+ - Test before wiring.
 
 > [!TIP]
-> For further customization, the YAML configurations used for creating these binaries are located in [/fw/yaml/](/fw/esphome_yamls/).
+> The YAML configurations used for compiling the provided binaries are available under [/fw/esphome_yamls/](/fw/esphome_yamls/).
 
 ### 4. Preparing the enclosure
 - plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron.
@@ -230,20 +249,15 @@ Solder R12 and header J4, use a USB to serial adapter.
 
 ## :bulb: Usage
 ### Control
-**Directly:**
-> *Available in all firmware binaries.*
-> It's useful for conveniently controlling the device.
-
+**Directly** *(included in all firmware binaries)*:
  - **press**: on/off
  - **rotate**: brightness adjustment
  - **press + rotate**: cycle lighting effects
 
-**Home Assistant:**
-> *Included in [hass.bin].*
+**Home Assistant** *(included in hass.bin)*:
+Integrating the device in Home Assistant: https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant.
 
-Integrating the device in Home Assistant: (https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant).
-
-![Screenshot of the device in Home Assistant](doc/assets/hass_screenshot.png)
+![screenshot of the device in Home Assistant](doc/assets/hass_screenshot.png)
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
@@ -253,17 +267,16 @@ The "Configuration" section allows customization of the device:
  - **Transition length**: How fast the bulb changes brightness in milliseconds.
  - **LED: red/blue/white**: set the ambient brightness of the LEDs.
 
-**Web server:**
-> *Included in [web_server.bin].*
+**Web server** (included in web_server.bin)*:
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-![web_server_ui_screenshot](doc/assets/web_server_screenshot.png)
+![screenshot of the web UI](doc/assets/web_server_screenshot.png)
 
 ### LED indicators
 There are three LEDs on the board:
- - **Red (top, led_1):** ambient / rotation feedback
- - **Blue (top, led_2):** ambient / status indicator
- - **White (bottom, led_3):** ambient
+ - **red (top, led_1):** ambient / rotation feedback
+ - **blue (top, led_2):** ambient / status indicator
+ - **white (bottom, led_3):** ambient
 
 ### Default light effects
 Light effects can be cycled with the rotary encoder or chosen directly from a UI.
@@ -283,43 +296,15 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 </p>
 </div>
 
-<<<<<<< HEAD
-
-=======
-<!--
-1. **Pulse (low, fast)**: pulsing at low brightness, quickly
-2. **Pulse (low, slow)**: pulsing at low brightness, slowly
-3. **Pulse (high, fast)**: pulsing at high brightness, quickly
-4. **Pulse (high, slow)**: pulsing at high brightness, slowly
-5. **Pulse (full, fast)**: pulsing from low to high brightness, quickly
-6. **Pulse (full, slow)**: pulsing from low to high brightness, slowly
-7. **Flicker (soft)**: soft flicker, imitating candle light
-8. **Flicker (intense)**: intense flicker, imitating candle light
--->
-
-
->>>>>>> 648be4c1f23fc76b2fbfe85cbffa6efefbed2b19
 ## :page_with_curl: Versions, releases and compatibility
 Each fabrication run results in a **GitHub release**.
-- Semantic versioning (major.minor), no patch versions
-- **PCB, chassis, and top plate are versioned independently**
-- Same **major versions fit together**
-
-Example layout:
-```
-enclosure/
-├── chassis/
-│   ├── v2.0-plastic/
-│   ├── v2.1-plastic/
-│   └── v2.1-resin/
-└── top_plate/
-	├── v2.0-default/
-	└── v2.0-pcbart/
-```
+- Semantic versioning (major.minor), no patch versions.
+- PCB, chassis, and top plate are versioned independently.
+- Same **major versions fit together**.
 
 
 ## :coffee: Contributing
-Every type of contribution is welcome, like improvements or corrections on the:
+Every type of contribution is welcome, like improvements or corrections to the:
 - schematic/PCB design
 - documentation
 - enclosure (chassis and top panel) design
@@ -353,7 +338,7 @@ gitGraph
     merge replace_y tag: "v2.0"
 ```
 
-You're welcome to post photos in [Discussions: Show and tell][discussions_show_and_tell].
+You're welcome to post your builds in [Discussions: Show and tell](https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell).
 
 ## License
 This project is licensed under the **MIT License**.
@@ -363,23 +348,12 @@ This project is licensed under the **MIT License**.
 **Disclaimer**: This project involves mains voltage electricity. The author assumes no liability for injury, damage, or regulatory violations. Build and use at your own risk. Ensure compliance with local electrical codes and regulations.
 
 
-<!-- links -->
+<!-- current version links -->
 
 [kicanvas_v2_0]: https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2FVasilKalchev%2FLEDDs%2Ftree%2Fv2.0%2Fhw
+[dw_release_bundle_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/bundle.zip
 
-[releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02 "/doc/releaselog.md"
-
-[dw_bom_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/bom.csv "bom.csv from release v2.0"
-[dw_ibom_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html "ibom.html from release v2.0"
-
-[dw_hass_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/hass.bin "full.bin from release v2.0"
-[dw_web_server_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/web_server.bin "web_server.bin from release v2.0"
-[dw_standalone_bin_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/standalone.bin "standalone.bin from release v2.0"
-	
-[discussions_show_and_tell]: https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell
-
-[hass_ui_screenshot]: 
-[web_server_ui_screenshot]: 
+[releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02
 
 <!-- /links -->
 
