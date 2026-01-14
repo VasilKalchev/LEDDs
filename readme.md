@@ -13,7 +13,7 @@
 
 **LEDDs** is an open-hardware, DIY smart dimmer designed for 230 V LED bulbs. It is built around the ESP32-C3-12F and is designed to sit on a desk or table, replacing standard inline cord switches.
 
-The project consists of a PCB, a 3D-printable chassis, and a top plate designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a rotary encoder so it can be controlled easily or used as a standalone device.
+The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate** designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a **rotary encoder** so it can be controlled easily or used as a standalone device.
 
 > [!CAUTION]
 > **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
@@ -82,7 +82,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 > [!IMPORTANT]
 > Designed for 230 VAC at 50 Hz.
 >
-> Usage with 120 VAC at 60 Hz will possibly require adjusting component values of the zero-cross and the voltage regulator circuits.
+> Usage with 120 VAC at 60 Hz will probably require adjusting the component values of the zero-cross and the voltage regulator circuits.
 
 ---
 
@@ -142,15 +142,13 @@ Check out the BOM provided in the release bundle for complete components list.
   - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
     - gerbers for JLCPCB: available in the bundle
     - for other fabricators - use KiCad to generate gerbers according to the manufacturer's instructions
-    See the [/doc/releaselog.md](/doc/releaselog.md) for tested board properties
-
-  - **chassis**: STL files are available in the bundle
+  - **chassis**: choose a variant from the provided STL files
 
 ### 2. PCB assembly instructions
 > [!TIP]
 > Use the provided **interactive BOM** for soldering the components.
 
-![ibom preview](/doc/assets/ibom_screenshot_720p.png)
+![ibom preview](doc/assets/ibom_screenshot_720p.png)
 
 <!--<p align=center>
   <img src="doc/assets/ibom_screenshot_720p.png" href="https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html" alt="interactive BOM screenshot" title="iBOM" width="75%" />
@@ -159,15 +157,15 @@ Check out the BOM provided in the release bundle for complete components list.
 #### Components choices
 
 ##### Microcontroller module
-<strong>ESP32-C3-12F (recommended)</strong>
+**ESP32-C3-12F (recommended)**
 
-![esp32-c3-12f](/doc/assets/assembly/esp32-c3-12f.jpg)
+![esp32-c3-12f](doc/assets/assembly/esp32-c3-12f.jpg)
 
 - solder R13
 
-<details><summary>*ESP8266 ESP-12F (not recommended)*</summary>
+<details><summary>ESP8266 ESP-12F (not recommended)</summary>
 
-![esp-12f](/doc/assets/assembly/esp-12f.jpg)
+![esp-12f](doc/assets/assembly/esp-12f.jpg)
 
 - solder JP2
 - don't solder R13
@@ -184,15 +182,15 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 
 **H11L1SR2M**
 
-![h11l1](/doc/assets/assembly/h11l1.jpg)
+![h11l1](doc/assets/assembly/h11l1.jpg)
 
  - solder the optoisolator on footprint U4
  - solder C13
  - don't solder R23
 
-<details><summary>--PC817XI (not recommended)--</summary>
+<details><summary>PC817XI (not recommended)</summary>
 
-![pc817](/doc/assets/assembly/pc817.jpg)
+![pc817](doc/assets/assembly/pc817.jpg)
 
 - solder the optoisolator on footprint U3
 - solder R23
@@ -205,22 +203,23 @@ This optoisolator is the same as the one used for controlling the MOSFET's gate,
 ##### Skipping the relay
 The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature and can be omitted.
 
-![relay](/doc/assets/assembly/relay.jpg)
+![relay](doc/assets/assembly/relay.jpg)
 
  - don't solder K1, C3, D2, R2 and Q1
  - use a wire to short pin 11 to 14
  - use a wire to short pin 21 to 24
 
 ##### Skipping the rotary encoder
+![boot_button](doc/assets/assembly/boot_button.jpg)
+
 If the rotary encoder is not required, there is no need to solder R3, R4, C4, C5 and C6. Optionally a push button (SW2) can be soldered so boot mode can be entered manually.
+
 A modified top plate (without a hole in the middle) is recommended for safety reasons (not currently available).
 
-![boot_button](/doc/assets/assembly/boot_button.jpg)
-
 ##### Using the UART header instead of the USB for programming *(not tested)*
-Solder R12 and header J4, use a USB to serial adapter.
+![uart](doc/assets/assembly/uart.jpg)
 
-![uart](/doc/assets/assembly/uart.jpg)
+Solder R12 and header J4, use a USB to serial adapter.
 
 ### 3. Flashing the firmware
  - Connect to the board via USB-C.
@@ -235,8 +234,8 @@ Solder R12 and header J4, use a USB to serial adapter.
 > The YAML configurations used for compiling the provided binaries are available under [/fw/esphome_yamls/](/fw/esphome_yamls/).
 
 ### 4. Preparing the enclosure
-- plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron.
-- resin chassis: no preparation needed.
+- plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron
+- resin chassis: no preparation needed
 
 ### 5. Final assembly
  - Mount a knob to the rotary encoder.
@@ -249,12 +248,13 @@ Solder R12 and header J4, use a USB to serial adapter.
 
 ## :bulb: Usage
 ### Control
-**Directly** *(included in all firmware binaries)*:
+**Directly** *(possible with all firmware variants)*:
  - **press**: on/off
  - **rotate**: brightness adjustment
  - **press + rotate**: cycle lighting effects
 
 **Home Assistant** *(included in hass.bin)*:
+
 Integrating the device in Home Assistant: https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant.
 
 ![screenshot of the device in Home Assistant](doc/assets/hass_screenshot.png)
@@ -267,7 +267,7 @@ The "Configuration" section allows customization of the device:
  - **Transition length**: How fast the bulb changes brightness in milliseconds.
  - **LED: red/blue/white**: set the ambient brightness of the LEDs.
 
-**Web server** (included in web_server.bin)*:
+**Web server** *(included in web_server.bin)*:
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
 ![screenshot of the web UI](doc/assets/web_server_screenshot.png)
@@ -355,7 +355,7 @@ This project is licensed under the **MIT License**.
 
 [releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02
 
-<!-- /links -->
+<!-- /current version links -->
 
 
 <!-- checklist
@@ -364,7 +364,7 @@ This project is licensed under the **MIT License**.
 
  - [x] set release result (template in releaselog.md)
  - [x] update the sections as needed
- - [x] comment out this "checklist" and "templates" sections
+ - [x] comment out this checklist
 
 </details>
 

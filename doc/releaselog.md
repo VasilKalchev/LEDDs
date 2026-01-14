@@ -20,6 +20,12 @@
  - Firmware must target ESP32-C3.
  - Devices can be programmed directly over USB-C.
 
+---
+
+<p align="center">
+  <img src="https://github.com/VasilKalchev/LEDDs/blob/<string>/doc/assets/<name>.jpg" alt="" title="" width="49%" />
+  <img src="https://github.com/VasilKalchev/LEDDs/blob/<string>/doc/assets/<name>.jpg" alt="" title="" width="49%" />
+</p>
 
 ![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
 
@@ -56,6 +62,8 @@
   <img src="https://github.com/VasilKalchev/LEDDs/blob/93d31402db485d9abf524c4a871a87e788e3d957/doc/assets/pcb-assembled_front_red_720p.jpg" alt="PCB - assembled, front" title="PCB - assembled, side" width="49%" />
   <img src="https://github.com/VasilKalchev/LEDDs/blob/93d31402db485d9abf524c4a871a87e788e3d957/doc/assets/enclosure-assembled_side_red_720p.jpg" alt="Enclosure - assembled, side" title="Enclosure - assembled, side" width="49%" />
 </p>
+
+---
 
 ![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
 
