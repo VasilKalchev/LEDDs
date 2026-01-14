@@ -72,6 +72,7 @@ esp32:
 
 wifi:
   ap:
+  use_address: 10.0.4.165
 
 captive_portal:
 
@@ -255,6 +256,7 @@ binary_sensor:
     pin:
       number: ${re_btn_pin}
       inverted: true
+      ignore_strapping_warning: true
     entity_category: diagnostic
     use_interrupt: true
     interrupt_type: ANY
