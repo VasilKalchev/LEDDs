@@ -36,12 +36,12 @@ The project consists of a PCB, a 3D-printable chassis, and a top plate designed 
    * [3. Flashing the firmware](#3-flashing-the-firmware)
    * [4. Preparing the enclosure](#4-preparing-the-enclosure)
    * [5. Final assembly](#5-final-assembly)
-* [Usage](#usage)
+* [Usage](#bulb-usage)
    * [Control](#control)
    * [LED indicators](#led-indicators)
    * [Default light effects](#default-light-effects)
-* [Versions, releases and compatibility](#versions-releases-and-compatibility)
-* [Contributing](#contributing)
+* [Versions, releases and compatibility](#page_with_curl-versions-releases-and-compatibility)
+* [Contributing](#coffee-contributing)
 * [License](#license)
 
 ---
@@ -54,20 +54,22 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 * smoother dimming with reduced flicker
 * lower minimum brightness levels
 
+> The schematic and PCB can be [viewed][kicanvas_v2_0] in KiCanvas.
+
 ## :star: Features
-- **ESP32-C3** based with ESPHome firmware for integration with Home Assistant.
-- **Standalone** operation, doesn't require Home Assistant.
-- **Rotary encoder** control: rotate to dim, press+rotate for effects, press for on/off.
-- LEDs: red (rotation feedback), blue (status indicator), white (ambient).
-- Included **enclosure design**: 100 mm × 51 mm × 25 mm - ideal for desk lamp modifications.
-- Low idle power: ~0.3 W standby consumption
+- **ESP32-C3** based with ESPHome firmware for integration with Home Assistant
+- **Standalone** operation, doesn't require Home Assistant
+- **Rotary encoder** control: rotate to dim, press+rotate for effects, press for on/off
+- LEDs: red (rotation feedback), blue (status indicator), white (ambient)
+- Included **enclosure design**: 100 mm × 51 mm × 25 mm - ideal for desk lamp modifications
+- Low idle power: ~0.3 W in standby
 - Open source: MIT licensed
 
 ## :straight_ruler: Specifications
 
 | Parameter              | Value                        |
 | ---------------------- | ---------------------------- |
-| Input voltage          | 230 V AC                     |
+| Input voltage          | 230 VAC                     |
 | Maximum output power   | 100 W                        |
 | Idle power draw        | ~0.3 W                       |
 | Protections            | fuse and MOVs                |
@@ -75,73 +77,78 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 | Dimensions             | 100 × 51 × 25 mm (W × D × H) |
 | Connectivity           | Wi-Fi, USB-C (programming)   |
 
-> [!NOTE]
-> Designed for 230 V, 50 Hz AC. Usage with 120 V, 60 Hz AC will possibly require adjusting component values of the zero-cross and the voltage regulator circuits.
+[^1]: Also compatible with ESP8266 ESP-12F, but not recommended.
+
+> [!IMPROTANT]
+> Designed for 230 VAC at 50 Hz.
+> Usage with 120 VAC at 60 Hz will possibly require adjusting component values of the zero-cross and the voltage regulator circuits.
 
 ---
 
 ## Release/fabrication of v2.0
-![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
+![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
 
-> The fabricated board from release v2.0 works, but has some minor issues: [releaselog.md v2.0][releaselog_v2_0].
+> The fabricated board from release v2.0 works; it has a few minor issues: [releaselog.md v2.0][releaselog_v2_0].
 > 
-> :tada: Recommended for fabrication!
+> :memo: Recommended for fabrication!
 
 ---
 
 ## :open_file_folder: Repository structure
 ```
-├── hw/                     # KiCad PCB designs
-│   ├── lib/                # symbols and footprints
-│   ├── assets/             # fonts and graphics
-│   └── export/             # scripts for exporting gerbers, BOM and schematics/PCB PDFs
-├── fw/                     # ESPHome YAML configurations and firmware binaries
-├── doc/                    # additional documentation
-│   ├── releaselog.md       # main PCB release log
-│   ├── changelog.md        # main PCB change log
-│   └── conventions.md
+├── hw/                       # main PCB design (KiCad project)
+│   ├── lib/                  # symbols and footprints
+│   ├── assets/               # fonts and graphics
+│   └── export/               # scripts for exporting gerbers, BOM and schematics/PCB PDFs
+├── fw/                       # ESPHome YAML configurations and firmware binaries
+├── doc/                      # additional documentation
+│   ├── releaselog.md         # main PCB release log
+│   ├── changelog.md          # main PCB change log
 ├── enclosure/
-│   ├── chassis/            # 3D printable chassis
-│   │   ├── releaselog.md   # chassis release log
-│   │   ├── changelog.md    # chassis change log
+│   ├── chassis/              # 3D printable chassis
+│   │   ├── releaselog.md     # chassis release log
+│   │   ├── changelog.md      # chassis change log
 │   │   ├── vX.Y-variant_a/
 │   │   └── vX.Y-variant_b/
-│   └── top_plate/          # top plate design
-│       ├── releaselog.md   # top plate release log
-│       ├── changelog.md    # top plate change log
+│   └── top_plate/            # top plate design (KiCad project)
+│       ├── releaselog.md     # top plate release log
+│       ├── changelog.md      # top plate change log
 │       ├── vX.Y-variant_a/
 │       └── vX.Y-variant_b/
-└── img/                    # photos and renders
+└── img/                      # photos and renders
 ```
 
 ---
 ## :euro: Bill of materials
-Approximate cost
- - components: €[TBD]
+ - components: ~€15
  - PCB: €4 (ordered as prototype board)
- - chassis: €4-10 (when ordered)
  - top plate: €0-4 (can be combined with the main PCB)
+ - chassis: €4-10 (when ordered)
 
-See [BOM][dw_bom_v2_0] for complete component list.
+[Download the BOM][dw_bom_v2_0] for complete components list.
 
 
 ## :hammer: Build
 ### Prerequisites
-- Skills: soldering [^2], experience with mains electricity.
-- Tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter.
+- skills: soldering [^2], experience with mains electricity.
+- tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter.
+
+[^2]: Hardest component is the USB-C port. The board can be ordered pre-assembled.
 
 ### 1. Ordering the components
   - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
     - **gerbers** for JLCPCB: [main board], [top plate]
-    - for other fabricators - use KiCad to generate gerbers according to the manufactorers instructions
+    - for other fabricators - use KiCad to generate gerbers according to the manufacturers instructions
     - see the [release log.md](/docs/releaselog.md) for tested board properties
-   - **top plate**:
-     Select a top plate from [/enclosure/top_plate/](/enclosure/top_plate/).
-   - **Chassis**:
-     Select a chassis from [/enclosure/chassis/](/enclosure/chassis/).
+   - **top plate**: select a top plate from [/enclosure/top_plate/](/enclosure/top_plate/).
+   - **chassis**: select a chassis from [/enclosure/chassis/](/enclosure/chassis/).
 
 ### 2. PCB assembly instructions
-Use the [interactive BOM][dw_ibom_v2_0] to solder the components.
+> [!TIP]
+> Download the [interactive BOM][dw_ibom_v2_0] to solder the components.
+
+[![download ibom.html](doc/assets/ibom_screenshot_720p.png)][dw_ibom_v2_0]
+
 
 #### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
@@ -199,11 +206,12 @@ Solder R12 and header J4, use a USB to serial adapter.
 - Set your Wi-Fi credentials using the ESPHome web flasher
 - Test before wiring
 
-For further customization, the YAML configurations used for creating these binaries are located in [/fw/yaml/](/fw/esphome_yamls/).
+> [!TIP]
+> For further customization, the YAML configurations used for creating these binaries are located in [/fw/yaml/](/fw/esphome_yamls/).
 
 ### 4. Preparing the enclosure
-- Plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron.
-- Resin chassis: no preparation needed.
+- plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron.
+- resin chassis: no preparation needed.
 
 ### 5. Final assembly
  - Mount a knob to the rotary encoder.
@@ -214,7 +222,7 @@ For further customization, the YAML configurations used for creating these binar
  - Screw the top plate through the PCB into the chassis.
 
 
-## Usage
+## :bulb: Usage
 ### Control
 **Directly:**
 > *Available in all firmware binaries.*
@@ -229,7 +237,7 @@ For further customization, the YAML configurations used for creating these binar
 
 Integrating the device in Home Assistant: (https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant).
 
-![Screenshot of the device in Home Assistant][hass_ui_screenshot]
+![Screenshot of the device in Home Assistant](doc/assets/hass_screenshot.png)
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
@@ -243,7 +251,7 @@ The "Configuration" section allows customization of the device:
 > *Included in [web_server.bin].*
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-![web_server_ui_screenshot]
+![web_server_ui_screenshot](doc/assets/web_server_screenshot.png)
 
 ### LED indicators
 There are three LEDs on the board:
@@ -269,19 +277,8 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
 </p>
 </div>
 
-<!-- checklist
-1. **Pulse (low, fast)**: pulsing at low brightness, quickly
-2. **Pulse (low, slow)**: pulsing at low brightness, slowly
-3. **Pulse (high, fast)**: pulsing at high brightness, quickly
-4. **Pulse (high, slow)**: pulsing at high brightness, slowly
-5. **Pulse (full, fast)**: pulsing from low to high brightness, quickly
-6. **Pulse (full, slow)**: pulsing from low to high brightness, slowly
-7. **Flicker (soft)**: soft flicker, imitating candle light
-8. **Flicker (intense)**: intense flicker, imitating candle light
--->
 
-
-## Versions, releases and compatibility
+## :page_with_curl: Versions, releases and compatibility
 Each fabrication run results in a **GitHub release**.
 - Semantic versioning (major.minor), no patch versions
 - **PCB, chassis, and top plate are versioned independently**
@@ -300,7 +297,7 @@ enclosure/
 ```
 
 
-## Contributing
+## :coffee: Contributing
 Every type of contribution is welcome, like improvements or corrections on the:
 - schematic/PCB design
 - documentation
@@ -344,11 +341,10 @@ This project is licensed under the **MIT License**.
 
 **Disclaimer**: This project involves mains voltage electricity. The author assumes no liability for injury, damage, or regulatory violations. Build and use at your own risk. Ensure compliance with local electrical codes and regulations.
 
-[^1]: Also compatible with ESP8266 ESP-12F (not recommended).
-[^2]: Hardest component is the USB-C port. The board can be ordered pre-assembled.
-
 
 <!-- links -->
+
+[kicanvas_v2_0]: https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2FVasilKalchev%2FLEDDs%2Ftree%2Fv2.0%2Fhw
 
 [releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02 "/doc/releaselog.md"
 
