@@ -69,7 +69,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 | Parameter              | Value                        |
 | ---------------------- | ---------------------------- |
-| Input voltage          | 230 VAC                     |
+| Input voltage          | 230 VAC                      |
 | Maximum output power   | 100 W                        |
 | Idle power draw        | ~0.3 W                       |
 | Protections            | fuse and MOVs                |
@@ -152,7 +152,7 @@ Check out the BOM provided in the release bundle for complete components list.
 > [!TIP]
 > Use the provided **interactive BOM** for soldering the components.
 
-![ibom preview](doc/assets/ibom-screenshot_ann_720p.png)
+[![ibom preview](doc/assets/ibom-screenshot_ann_720p.png)]()
 
 
 #### Components choices
@@ -160,13 +160,15 @@ Check out the BOM provided in the release bundle for complete components list.
 ##### Microcontroller module
 **ESP32-C3-12F (recommended)**
 
-![esp32-c3-12f](doc/assets/assembly/c3_12f-720p.jpg)
+<!-- ![esp32-c3-12f](doc/assets/assembly/c3_12f-720p.jpg) -->
+<img src="doc/assets/assembly/c3_12f-720p.jpg" alt="esp32-c3-12f" width="50%" />
 
 - solder R13
 
-<details><summary>ESP8266 ESP-12F (not recommended)</summary>
+<details><summary><strong>ESP8266 ESP-12F (not recommended)</strong></summary>
 
-![esp-12f](doc/assets/assembly/12f-720p.jpg)
+<!-- ![esp-12f](doc/assets/assembly/12f-720p.jpg) -->
+<img src="doc/assets/assembly/12f-720p.jpg" alt="esp-12f" width="75%" />
 
 - solder JP2
 - don't solder R13
@@ -183,13 +185,14 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 
 **H11L1SR2M**
 
-![h11l1](doc/assets/assembly/h11l1-720p.jpg)
+<!-- ![h11l1](doc/assets/assembly/h11l1-720p.jpg) -->
+<img src="doc/assets/assembly/h11l1-720p.jpg" alt="h11l1" width="33%" />
 
  - solder the optoisolator on footprint U4
  - solder C13
  - don't solder R23
 
-<details><summary>PC817XI (not recommended)</summary>
+<details><summary><strong>PC817XI (not recommended)</strong></summary>
 
 ![pc817](doc/assets/assembly/pc817-720p.jpg)
 
