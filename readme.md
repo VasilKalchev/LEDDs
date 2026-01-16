@@ -152,14 +152,12 @@ Check out the BOM provided in the release bundle for complete components list.
 > [!TIP]
 > Use the provided **interactive BOM** for soldering the components.
 
-<!-- [![ibom preview](doc/assets/ibom-screenshot_ann_720p.png)]() -->
 <p align=center>
   <img src="doc/assets/ibom-screenshot_ann_720p.png" alt="interactive BOM preview" width="75%" />
 </p>
 
-#### Components choices
 
-##### Microcontroller module
+#### Microcontroller module
 <strong>ESP32-C3-12F (recommended)</strong>
 
 <img src="doc/assets/assembly/c3_12f-720p.jpg" alt="esp32-c3-12f" width="50%" />
@@ -170,17 +168,17 @@ Check out the BOM provided in the release bundle for complete components list.
 
 <img src="doc/assets/assembly/12f-720p.jpg" alt="esp-12f" width="50%" />
 
+- isolate pins 12 and 13 from the PCB pads (with tape)
 - solder JP2
 - don't solder R13
-- don't solder R8 and D5 ("led_3")
-- isolate pins 12 and 13 from the PCB pads (with tape)
 - don't solder R6 and D3 ("led_1")
+- don't solder R8 and D5 ("led_3")
 
 ESP8266 doesn't support native USB and requires an external USB to serial adapter for programming.
 
 </details>
 
-##### Zero-cross optoisolator
+#### Zero-cross optoisolator
 The PCB has footprints for a choice between 2 optoisolators that connect the zero-cross signal to the MCU.
 
 <strong>H11L1SR2M</strong>
@@ -203,26 +201,32 @@ This optoisolator is the same as the one used for controlling the MOSFET's gate,
 
 </details>
 
-##### Skipping the relay
+#### Skipping the relay
 The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature and can be omitted.
 
 <img src="doc/assets/assembly/relay-720p.jpg" alt="relay" width="50%" />
 
- - don't solder K1, C3, D2, R2 and Q1
  - use a wire to short pin 11 to 14
  - use a wire to short pin 21 to 24
+ - no need to solder C3, D2, R2 and Q1
 
-##### Skipping the rotary encoder
+#### Skipping the rotary encoder
 <img src="doc/assets/assembly/boot_button-720p.jpg" alt="boot button" width="50%" />
 
-If the rotary encoder is not required, there is no need to solder R3, R4, C4, C5 and C6. Optionally a push button (SW2) can be soldered so boot mode can be entered manually.
+If the rotary encoder is not required - solder a push button (SW2) so boot mode can be entered manually.
+
+ - no need to solder R3, R4, C4, C5 and C6
 
 A modified top plate (without a hole in the middle) is recommended for safety reasons (not currently available).
 
-##### Using the UART header instead of the USB for programming *(not tested)*
+#### Using the UART header instead of the USB for programming *(not tested)*
 <img src="doc/assets/assembly/uart-720p.jpg" alt="uart" width="50%" />
 
-Solder R12 and header J4, use a USB to serial adapter.
+ - solder R12
+ - solder header J4
+ - no need to solder R9 and R10
+
+Use a USB to serial adapter.
 
 ### 3. Flashing the firmware
  - Connect to the board via USB-C.
