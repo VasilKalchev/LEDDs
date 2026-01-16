@@ -79,10 +79,12 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 [^1]: Also compatible with ESP8266 ESP-12F, but not recommended.
 
+
 > [!IMPORTANT]
 > Designed for 230 VAC at 50 Hz.
 >
 > Usage with 120 VAC at 60 Hz will probably require adjusting the component values of the zero-cross and the voltage regulator circuits.
+
 
 ---
 
@@ -97,7 +99,11 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 ## :open_file_folder: Repository structure
 ```
+<<<<<<< HEAD
 ├── hw/                       # main PCB design (KiCad project)
+=======
+├── hw/                       # KiCad project
+>>>>>>> 495fe59 (Corrections.)
 │   ├── lib/                  # symbols and footprints
 │   ├── assets/               # fonts and graphics
 │   └── export/               # scripts for exporting gerbers, BOM and schematics/PCB PDFs
@@ -120,6 +126,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ```
 
 ---
+
 ## :euro: Bill of materials
  - components: ~€15
  - PCB: €4 (ordered as prototype board)
@@ -150,9 +157,6 @@ Check out the BOM provided in the release bundle for complete components list.
 
 ![ibom preview](doc/assets/ibom_screenshot_720p.png)
 
-<!--<p align=center>
-  <img src="doc/assets/ibom_screenshot_720p.png" href="https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/ibom.html" alt="interactive BOM screenshot" title="iBOM" width="75%" />
-</p>-->
 
 #### Components choices
 
@@ -295,6 +299,7 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
   <img src="/doc/assets/effect-flicker_intense.gif" alt="" title="Flicker (intense)" width="25%" />
 </p>
 </div>
+
 
 ## :page_with_curl: Versions, releases and compatibility
 Each fabrication run results in a **GitHub release**.

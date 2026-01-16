@@ -45,8 +45,9 @@ fp-info-cache
 
 
 # ESPHome
-/.esphome/
-/secrets.yaml
+.venv/
+.esphome/
+secrets.yaml
 
 # Other
 _*
