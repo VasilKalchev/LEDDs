@@ -1,5 +1,5 @@
 <p align=center>
-  <img src="doc/assets/ledds_title.png" alt="LEDDs" title="LEDDs" width="50%" />
+  <img src="doc/assets/ledds-front-illustration-title.png" alt="LEDDs" title="LEDDs" width="50%" />
 </p>
 
 <p align=center>trailing-edge dimmer for LED bulbs</p>
@@ -99,11 +99,8 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 
 ## :open_file_folder: Repository structure
 ```
-<<<<<<< HEAD
+
 ├── hw/                       # main PCB design (KiCad project)
-=======
-├── hw/                       # KiCad project
->>>>>>> 495fe59 (Corrections.)
 │   ├── lib/                  # symbols and footprints
 │   ├── assets/               # fonts and graphics
 │   └── export/               # scripts for exporting gerbers, BOM and schematics/PCB PDFs
@@ -155,7 +152,7 @@ Check out the BOM provided in the release bundle for complete components list.
 > [!TIP]
 > Use the provided **interactive BOM** for soldering the components.
 
-![ibom preview](doc/assets/ibom_screenshot_720p.png)
+![ibom preview](doc/assets/ibom-screenshot_ann_720p.png)
 
 
 #### Components choices
@@ -163,13 +160,13 @@ Check out the BOM provided in the release bundle for complete components list.
 ##### Microcontroller module
 **ESP32-C3-12F (recommended)**
 
-![esp32-c3-12f](doc/assets/assembly/esp32-c3-12f.jpg)
+![esp32-c3-12f](doc/assets/assembly/c3_12f-720p.jpg)
 
 - solder R13
 
 <details><summary>ESP8266 ESP-12F (not recommended)</summary>
 
-![esp-12f](doc/assets/assembly/esp-12f.jpg)
+![esp-12f](doc/assets/assembly/12f-720p.jpg)
 
 - solder JP2
 - don't solder R13
@@ -186,7 +183,7 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 
 **H11L1SR2M**
 
-![h11l1](doc/assets/assembly/h11l1.jpg)
+![h11l1](doc/assets/assembly/h11l1-720p.jpg)
 
  - solder the optoisolator on footprint U4
  - solder C13
@@ -194,7 +191,7 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 
 <details><summary>PC817XI (not recommended)</summary>
 
-![pc817](doc/assets/assembly/pc817.jpg)
+![pc817](doc/assets/assembly/pc817-720p.jpg)
 
 - solder the optoisolator on footprint U3
 - solder R23
@@ -207,21 +204,21 @@ This optoisolator is the same as the one used for controlling the MOSFET's gate,
 ##### Skipping the relay
 The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature and can be omitted.
 
-![relay](doc/assets/assembly/relay.jpg)
+![relay](doc/assets/assembly/relay-720p.jpg)
 
  - don't solder K1, C3, D2, R2 and Q1
  - use a wire to short pin 11 to 14
  - use a wire to short pin 21 to 24
 
 ##### Skipping the rotary encoder
-![boot_button](doc/assets/assembly/boot_button.jpg)
+![boot_button](doc/assets/assembly/boot_button-720p.jpg)
 
 If the rotary encoder is not required, there is no need to solder R3, R4, C4, C5 and C6. Optionally a push button (SW2) can be soldered so boot mode can be entered manually.
 
 A modified top plate (without a hole in the middle) is recommended for safety reasons (not currently available).
 
 ##### Using the UART header instead of the USB for programming *(not tested)*
-![uart](doc/assets/assembly/uart.jpg)
+![uart](doc/assets/assembly/uart-720p.jpg)
 
 Solder R12 and header J4, use a USB to serial adapter.
 
@@ -261,7 +258,7 @@ Solder R12 and header J4, use a USB to serial adapter.
 
 Integrating the device in Home Assistant: https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant.
 
-![screenshot of the device in Home Assistant](doc/assets/hass_screenshot.png)
+![screenshot of the device in Home Assistant](doc/assets/hass-screenshot.png)
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
@@ -274,7 +271,7 @@ The "Configuration" section allows customization of the device:
 **Web server** *(included in web_server.bin)*:
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-![screenshot of the web UI](doc/assets/web_server_screenshot.png)
+![screenshot of the web UI](doc/assets/web_server-screenshot_720p.png)
 
 ### LED indicators
 There are three LEDs on the board:
