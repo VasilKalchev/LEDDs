@@ -152,23 +152,23 @@ Check out the BOM provided in the release bundle for complete components list.
 > [!TIP]
 > Use the provided **interactive BOM** for soldering the components.
 
-[![ibom preview](doc/assets/ibom-screenshot_ann_720p.png)]()
-
+<!-- [![ibom preview](doc/assets/ibom-screenshot_ann_720p.png)]() -->
+<p align=center>
+  <img src="doc/assets/ibom-screenshot_ann_720p.png" alt="interactive BOM preview" width="75%" />
+</p>
 
 #### Components choices
 
 ##### Microcontroller module
-**ESP32-C3-12F (recommended)**
+<strong>ESP32-C3-12F (recommended)</strong>
 
-<!-- ![esp32-c3-12f](doc/assets/assembly/c3_12f-720p.jpg) -->
 <img src="doc/assets/assembly/c3_12f-720p.jpg" alt="esp32-c3-12f" width="50%" />
 
 - solder R13
 
 <details><summary><strong>ESP8266 ESP-12F (not recommended)</strong></summary>
 
-<!-- ![esp-12f](doc/assets/assembly/12f-720p.jpg) -->
-<img src="doc/assets/assembly/12f-720p.jpg" alt="esp-12f" width="75%" />
+<img src="doc/assets/assembly/12f-720p.jpg" alt="esp-12f" width="50%" />
 
 - solder JP2
 - don't solder R13
@@ -183,10 +183,9 @@ ESP8266 doesn't support native USB and requires an external USB to serial adapte
 ##### Zero-cross optoisolator
 The PCB has footprints for a choice between 2 optoisolators that connect the zero-cross signal to the MCU.
 
-**H11L1SR2M**
+<strong>H11L1SR2M</strong>
 
-<!-- ![h11l1](doc/assets/assembly/h11l1-720p.jpg) -->
-<img src="doc/assets/assembly/h11l1-720p.jpg" alt="h11l1" width="33%" />
+<img src="doc/assets/assembly/h11l1-720p.jpg" alt="h11l1" width="50%" />
 
  - solder the optoisolator on footprint U4
  - solder C13
@@ -194,7 +193,7 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 
 <details><summary><strong>PC817XI (not recommended)</strong></summary>
 
-![pc817](doc/assets/assembly/pc817-720p.jpg)
+<img src="doc/assets/assembly/pc817-720p.jpg" alt="pc817" width="50%" />
 
 - solder the optoisolator on footprint U3
 - solder R23
@@ -207,21 +206,21 @@ This optoisolator is the same as the one used for controlling the MOSFET's gate,
 ##### Skipping the relay
 The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature and can be omitted.
 
-![relay](doc/assets/assembly/relay-720p.jpg)
+<img src="doc/assets/assembly/relay-720p.jpg" alt="relay" width="50%" />
 
  - don't solder K1, C3, D2, R2 and Q1
  - use a wire to short pin 11 to 14
  - use a wire to short pin 21 to 24
 
 ##### Skipping the rotary encoder
-![boot_button](doc/assets/assembly/boot_button-720p.jpg)
+<img src="doc/assets/assembly/boot_button-720p.jpg" alt="boot button" width="50%" />
 
 If the rotary encoder is not required, there is no need to solder R3, R4, C4, C5 and C6. Optionally a push button (SW2) can be soldered so boot mode can be entered manually.
 
 A modified top plate (without a hole in the middle) is recommended for safety reasons (not currently available).
 
 ##### Using the UART header instead of the USB for programming *(not tested)*
-![uart](doc/assets/assembly/uart-720p.jpg)
+<img src="doc/assets/assembly/uart-720p.jpg" alt="uart" width="50%" />
 
 Solder R12 and header J4, use a USB to serial adapter.
 
