@@ -15,6 +15,9 @@
 
 The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate** designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a **rotary encoder** so it can be controlled easily or used as a standalone device.
 
+![ledds](doc/assets/ledds-front_angle_1440p.jpg)
+
+
 > [!CAUTION]
 > **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
 > * Do not attempt to build this device unless you are experienced with high-voltage electronics.
@@ -94,6 +97,11 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 > The fabricated board from release v2.0 works; it has a few minor issues: [/doc/releaselog.md v2.0][releaselog_v2_0].
 > 
 > :memo: Recommended for fabrication!
+
+<p align="center">
+  <a href="img/pcb-front_1440p"><img src="doc/assets/pcb-front_720p.jpg" alt="" title="PCB front" width="49%" /></a>
+  <a href="img/pcb-back_1440p"><img src="doc/assets/pcb-back_720p.jpg" alt="" title="PCB back" width="49%" /></a>
+</p>
 
 ---
 
@@ -277,7 +285,7 @@ The "Configuration" section allows customization of the device:
 **Web server** *(included in web_server.bin)*:
 > This is useful if you don't have Home Assistant, but want to control the device remotely.
 
-![screenshot of the web UI](doc/assets/web_server-screenshot_720p.png)
+![screenshot of the web UI](doc/assets/web_server-screenshot.png)
 
 ### LED indicators
 There are three LEDs on the board:
