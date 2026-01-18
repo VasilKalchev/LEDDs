@@ -1,28 +1,6 @@
 
-substitutions:
-  device_friendly_name: "LEDDs 2"
-  
-  # config
-  feedback_blink_length: 40 ms
-  update_period_default: 180 s
-
-  # IDs
-  light_id: dimmer_light
-  ac_dimmer_id: ac_dimmer_output
-  rotary_encoder_id: rotary_encoder_sensor
-  rotary_encoder_btn_id: rotary_encoder_btn_sensor
-  feedback_led_id: red_led
-
-  # pinout
-  led_2_pin: GPIO2
-  zc_pin: GPIO3
-  re_b_pin: GPIO4
-  re_a_pin: GPIO5
-  led_1_pin: GPIO6
-  gate_pin: GPIO7
-  led_3_pin: GPIO8
-  re_btn_pin: GPIO9
-  relay_pin: GPIO10
+packages:
+  - !include common_ui.yaml
 
 
 esphome:
@@ -60,448 +38,60 @@ esphome:
               id(${light_id}).turn_off().perform();
             }
 
-logger:
-    level: WARN  # NONE < ERROR < WARN < INFO < DEBUG < VERBOSE < VERY_VERBOSE
-
-esp32:
-  variant: esp32c3
-  board: esp32-c3-devkitm-1
-  framework:
-    type: arduino
-    version: recommended
-
-wifi:
-  ap:
-
-captive_portal:
-
-improv_serial:
-  next_url: https://github.com/VasilKalchev/LEDDs/tree/v2.0
-
-ota:
-  platform: esphome
-  on_begin:
-    then:
-      - output.turn_off:
-          id: ${ac_dimmer_id}
+# =====
 
 web_server:
   port: 80
   version: 3
 
-debug:
-  update_interval: ${update_period_default}
-
-
-# -----
-
+# =====
 
 light:
-  - platform: monochromatic
-    id: ${light_id}
-    name: "Bulb"
-    output: ${ac_dimmer_id}
-    icon: "mdi:lightbulb-variant"
-    default_transition_length: 300 ms
-    gamma_correct: 2.2
-    restore_mode: ALWAYS_OFF
-    effects: !include packages/monochromic_effects.yaml
-    on_state:
-      - sensor.template.publish:
-          id: power_draw_est
-          state: !lambda |-
-            const float quiescent_pwr_draw = 0.3;
-
-            std::string effect_name = id(${light_id}).get_effect_name();
-            float mult = 0.0;
-
-            if (effect_name == "Pulse (low, fast)") {
-                mult = 0.2;
-            } else if (effect_name == "Pulse (low, slow)") {
-                mult = 0.2;
-            } else if (effect_name == "Pulse (high, fast)") {
-                mult = 0.8;
-            } else if (effect_name == "Pulse (high, slow)") {
-                mult = 0.8;
-            } else if (effect_name == "Pulse (full, fast)") {
-                mult = 0.5;
-            } else if (effect_name == "Pulse (full, slow)") {
-                mult = 0.5;
-            } else {  // flicker
-                float brightness = id(${light_id}).remote_values.get_brightness();
-                float gamma_correct = id(${light_id}).get_gamma_correct();
-
-                id(${light_id}).remote_values.as_brightness(&brightness, gamma_correct);
-                mult = std::acos(1 - (2 * brightness)) / 3.14159;  // RMS power compensation
-            }
-
-            ESP_LOGV("light", "Multiplier: %0.4f; bulb power rating: %0.4f", mult, id(bulb_power_rating_input).state);
-            return (mult * id(bulb_power_rating_input).state) + quiescent_pwr_draw;
-
-  - platform: monochromatic
-    id: red_led
-    name: "LED: red"
-    output: led1
-    icon: "mdi:led-outline"
-    entity_category: "config"
-    default_transition_length: 1000 ms
-    restore_mode: RESTORE_DEFAULT_ON
-    initial_state:
-      state: on
-      brightness: 100 %
+  - id: !extend red_led
     web_server:
       sorting_weight: 5
 
-  - platform: monochromatic
-    id: blue_led
-    name: "LED: blue"
-    output: led2
-    icon: "mdi:led-outline"
-    entity_category: "config"
-    default_transition_length: 1000 ms
-    restore_mode: RESTORE_DEFAULT_ON
-    initial_state:
-      state: on
-      brightness: 100 %
+  - id: !extend blue_led
     web_server:
       sorting_weight: 6
 
-  - platform: monochromatic
-    id: white_led
-    name: "LED: white"
-    output: led3
-    icon: "mdi:led-outline"
-    entity_category: "config"
-    default_transition_length: 1000 ms
-    restore_mode: RESTORE_DEFAULT_ON
-    initial_state:
-      state: on
-      brightness: 100 %
+  - id: !extend white_led
     web_server:
       sorting_weight: 7
 
 
-  - platform: status_led
-    id: blue_status_led
-    pin:
-      number: ${led_1_pin}
-      allow_other_uses: true
 
-
-sensor:
-  - platform: rotary_encoder
-    id: ${rotary_encoder_id}
-    name: "Knob"
-    icon: "mdi:knob"
-    internal: true
-    pin_a: ${re_a_pin}
-    pin_b: ${re_b_pin}
-    min_value: -1
-    max_value: 1
-    publish_initial_value: true
-    restore_mode: ALWAYS_ZERO
-    filters:
-      - debounce: 20 ms
-    on_clockwise:
-      then:
-        - if:
-            condition:
-              - binary_sensor.is_off: ${rotary_encoder_btn_id}
-            then:
-              - script.execute:
-                  id: feedback_blink
-                  condition: !lambda 'return id(${light_id}).remote_values.get_brightness() < 1.0;'
-              - light.dim_relative:
-                  id: ${light_id}
-                  relative_brightness: 6.25 %  # 10 % | 6.25 %
-                  transition_length: 0 ms
-            else:
-              - script.execute:
-                  id: feedback_blink
-                  condition: !lambda 'return id(${light_id}).get_current_effect_index() < (uint32_t)id(${light_id}).get_effect_count();'
-              - script.execute:
-                  id: walk_effects
-                  forward: true
-
-    on_anticlockwise:
-      then:
-        - if:
-            condition:
-              - binary_sensor.is_off: ${rotary_encoder_btn_id}
-            then:
-              - script.execute:
-                  id: feedback_blink
-                  condition: !lambda 'return id(${light_id}).remote_values.get_state() > 0.0;'
-              - light.dim_relative:
-                  id: ${light_id}
-                  relative_brightness: -6.25 %  # -10 % | -6.25 %
-                  transition_length: 0 ms
-            else:
-              - script.execute:
-                  id: feedback_blink
-                  condition: !lambda 'return id(${light_id}).get_current_effect_index() > 0;'
-              - script.execute:
-                  id: walk_effects
-                  forward: false
-
-  - platform: template
-    id: power_draw_est
-    name: "Power [est]"
-    unit_of_measurement: "W"
-    device_class: power
-    state_class: measurement
-    icon: "mdi:flash"
-    accuracy_decimals: 1
-    update_interval: never
-
-
-binary_sensor:
-  - platform: gpio
-    id: ${rotary_encoder_btn_id}
-    name: "Knob button"
-    internal: true
-    pin:
-      number: ${re_btn_pin}
-      inverted: true
-    entity_category: diagnostic
-    use_interrupt: true
-    interrupt_type: ANY
-    filters:
-      - delayed_on_off: 10 ms
-    on_click:
-      min_length: 50 ms
-      max_length: 500 ms
-      then:
-        - light.toggle:
-            id: ${light_id}
 
 ### Configuration ---
 
 
 number:
-  - platform: template
-    id: default_transition_length_input
-    name: "Transition length"
-    icon: "mdi:clock-start"
-    entity_category: config
-    unit_of_measurement: ms
-    mode: auto
-    device_class: duration
-    min_value: 0
-    max_value: 3000
-    step: 100
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 300
-    set_action:
-      - lambda: |-
-          id(${light_id}).set_default_transition_length(x);
+  - id: !extend default_transition_length_input
     web_server:
       sorting_weight: -20
 
-  - platform: template
-    id: minimum_power_input
-    name: "Minimum level"
-    icon: "mdi:lightbulb-on-10"
-    entity_category: config
-    unit_of_measurement: "%"
-    mode: auto
-    min_value: 0
-    max_value: 99
-    step: 1
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 0
-    set_action:
-      - output.set_min_power:
-          id: ${ac_dimmer_id}
-          min_power: !lambda "return (float)x / 100.0f;"
-      - light.turn_on:
-          id: ${light_id}
-          brightness: 1 %
-          transition_length: 0 s
+  - id: !extend minimum_power_input
     web_server:
       sorting_weight: -30
 
-  - platform: template
-    id: gamma_correct_input
-    name: "Gamma correct"
-    icon: "mdi:gamma"
-    entity_category: config
-    mode: auto
-    min_value: 0.5
-    max_value: 4
-    step: 0.25
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 2.2
-    set_action:
-      - lambda: |-
-          id(${light_id}).set_gamma_correct(x);
-      - light.turn_on:
-          id: ${light_id}
+  - id: !extend gamma_correct_input
     web_server:
       sorting_weight: -40
 
-  - platform: template
-    id: bulb_power_rating_input
-    name: "Bulb power rating"
-    icon: "mdi:flash"
-    entity_category: config
-    unit_of_measurement: "W"
-    mode: box
-    device_class: power
-    min_value: 0.5
-    max_value: 200
-    step: 0.1
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_value: 5
+  - id: !extend bulb_power_rating_input
     web_server:
       sorting_weight: -50
 
 
 select:
-  - platform: template
-    id: restore_mode_input
-    name: "Restore mode"
-    icon: "mdi:backup-restore"
-    entity_category: config
-    options:
-      - "Off"
-      - "On"
-    update_interval: never
-    optimistic: true
-    restore_value: true
-    initial_option: "Off"
+  - id: !extend restore_mode_input
     web_server:
       sorting_weight: -10
-    set_action:
-      - lambda: |-
-          std::string option = x.c_str();
-
-          LightRestoreMode res_mode = LIGHT_ALWAYS_OFF;
-          if (option == "Off") {
-            res_mode = LIGHT_ALWAYS_OFF;
-          } else if (option == "On") {
-            res_mode = LIGHT_ALWAYS_ON;
-          } else {
-            ESP_LOGW("select", "Unknown select option: %s\n", option);
-          }
-
-          ESP_LOGV("main", "Restore mode index: %d\n", res_mode);
 
 ### Configuration ---
 
 
 button:
-  - platform: restart
-    name: "Restart"
-    entity_category: config
-    device_class: restart
+  - id: !extend restart_button
     web_server:
       sorting_weight: 10
-
-text_sensor:
-  - platform: version
-    name: "ESPHome version"
-    hide_timestamp: true
-
-  - platform: debug
-    reset_reason:
-      name: "Reset reason"
-
-
-power_supply:
-  - id: ac_live
-    pin:
-      number: ${relay_pin}
-      inverted: false
-    enable_time: 100 ms
-    keep_on_time: 500 ms
-    enable_on_boot: false
-
-output:
-  - platform: ac_dimmer
-    id: ${ac_dimmer_id}
-    gate_pin:
-      number: ${gate_pin}
-      inverted: yes
-    zero_cross_pin:
-      number: ${zc_pin}
-      inverted: no
-      mode:
-        input: true
-    method: trailing
-    init_with_half_cycle: true
-    zero_means_zero: true
-    min_power: 0 %
-    max_power: 100 %
-    power_supply: ac_live
-
-  - platform: ledc
-    id: led1
-    pin:
-      number: ${led_1_pin}
-      allow_other_uses: true
-    frequency: 200 Hz
-  - platform: ledc
-    id: led2
-    frequency: 200 Hz
-    pin:
-      number: ${led_2_pin}
-      ignore_strapping_warning: true
-  - platform: ledc
-    id: led3
-    frequency: 200 Hz
-    pin:
-      number: ${led_3_pin}
-      ignore_strapping_warning: true
-
-
-script:
-  - id: walk_effects
-    parameters:
-      forward: bool
-    then:
-      - light.turn_on:
-          id: ${light_id}
-          effect: !lambda |-
-            size_t const effects_count = id(${light_id}).get_effect_count();
-            ESP_LOGV("walk_effects", "effects count: %d\n", effects_count);
-
-            uint32_t effect_ndx = id(${light_id}).get_current_effect_index();
-            ESP_LOGV("walk_effects", "effect ndx: %d (%s)\n", effect_ndx, id(${light_id}).get_effect_name_by_index(effect_ndx).c_str());
-
-            if (forward == true) {
-              if (effect_ndx < effects_count) {
-                effect_ndx += 1;
-              }
-            } else {
-              if (effect_ndx > 0) {
-                effect_ndx -= 1;
-              }
-            }
-            ESP_LOGV("walk_effects", "new ndx: %d (%s)\n", effect_ndx, id(${light_id}).get_effect_name_by_index(effect_ndx).c_str());
-
-            return id(${light_id}).get_effect_name_by_index(effect_ndx);
-
-  - id: feedback_blink
-    parameters:
-      condition: bool
-    then:
-      - if:
-          condition:
-            lambda: 'return condition == true;'
-          then:
-            - light.toggle:
-                id: ${feedback_led_id}
-                transition_length: 0 s
-            - delay: ${feedback_blink_length}
-            - light.toggle:
-                id: ${feedback_led_id}
-                transition_length: 0 s
