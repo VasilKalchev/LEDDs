@@ -25,14 +25,8 @@ fp-info-cache
 *.dsn
 *.ses
 
-## exported sheets
-**/export/*.pdf
-**/export/*.png
-**/export/*.svg
-
-## exported BOM files
-# **/export/bom.*
-# **/export/ibom.html
+## exports
+**/export/*.mp4
 
 ## exported gerbers
 **/export/gerbers*
