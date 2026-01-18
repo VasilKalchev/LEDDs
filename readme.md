@@ -99,8 +99,8 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 > :memo: Recommended for fabrication!
 
 <p align="center">
-  <a href="img/pcb-front_1440p"><img src="doc/assets/pcb-front_720p.jpg" alt="" title="PCB front" width="49%" /></a>
-  <a href="img/pcb-back_1440p"><img src="doc/assets/pcb-back_720p.jpg" alt="" title="PCB back" width="49%" /></a>
+  <a href="img/pcb-front_1440p.jpg"><img src="doc/assets/pcb-front_720p.jpg" alt="" title="PCB front" width="49%" /></a>
+  <a href="img/pcb-back_1440p.jpg"><img src="doc/assets/pcb-back_720p.jpg" alt="" title="PCB back" width="49%" /></a>
 </p>
 
 ---
