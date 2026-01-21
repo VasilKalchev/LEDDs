@@ -27,11 +27,20 @@
   <img src="https://github.com/VasilKalchev/LEDDs/blob/<string>/doc/assets/<name>.jpg" alt="" title="" width="49%" />
 </p>
 
+
+![Status: Stable](https://img.shields.io/badge/Stable-brightgreen?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Verified working.
+> The fabricated board from this release is fully functional. Minor issues may exist but do not affect operation.
+>
+> :memo: **Recommended for fabrication.**
+
+<!--
 ![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
 
 > The fabricated board from release vX.Y works; it has a few minor issues.
 >
 > :memo: Recommended for fabrication!
+-->
 
 ### Fabbrication properties:
  - Fabricator: JLCPCB
@@ -65,11 +74,11 @@
 
 ---
 
-![good fabrication](https://img.shields.io/badge/good-greenyellow?style=for-the-badge&label=Release/fabrication%20result)
-
-> The fabricated board from release v1.0 works; it has some minor issues.
+![Status: Stable](https://img.shields.io/badge/Stable-brightgreen?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Verified working.
+> The fabricated board from this release is fully functional. Minor issues may exist but do not affect operation.
 >
-> :grey_exclamation: Obsolete.
+> :grey_exclamation: **Obsolete!**
 
 ### Fabrication properties:
  - Fabricator: JLCPCB
@@ -132,7 +141,59 @@ List of checklists inside the repository:
 -->
 
 
-<!-- release assessment templates
+<!-- release assessment templates (new)
+
+![Status: Great](https://img.shields.io/badge/Great-limegreen?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Great release.
+> The fabricated board works without any known issues.
+>
+> :tada: **Recommended for fabrication!** | :grey_exclamation: **Obsolete!**
+
+---
+
+![Status: Stable](https://img.shields.io/badge/Stable-brightgreen?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Verified working.
+> The fabricated board from this release is fully functional. Minor issues may exist but do not affect operation: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
+>
+> :memo: **Recommended for fabrication.** | :grey_exclamation: **Obsolete!**
+
+---
+
+![Status: With issues](https://img.shields.io/badge/Functional_(w%2F_Caveats)-yellow?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Functional with modifications.
+> This board works, but has signifacant issues: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
+>
+> :grey_exclamation: Use [version X.Y] for fabrication or wait for a fix.
+
+---
+
+![Status: Broken](https://img.shields.io/badge/Do_Not_Use-firebrick?style=for-the-badge&label=Release/fabrication%20result)
+
+> **Status:** Critical faults.
+> The fabricated board from this release has significant design flaws and does not function correctly: [releaselog](/doc/releaselog.md#vXY---202Y-MM-DD).
+>
+> :stop_sign: **Do not fabricate.** Use [Version X.Y] instead.
+
+---
+
+![Status: WIP](https://img.shields.io/badge/In_development-lightgrey?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Work in progress.
+> This branch is currently in active development and may be unstable.
+>
+> :hourglass_flowing_sand: **Wait for release** or use [Version X.Y].
+
+---
+
+![Status: Untested](https://img.shields.io/badge/Untested_fix-blueviolet?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Design fix (not yet fabricated).
+> This release patches bugs found in vX.X. The design is theoretically correct but has not been physically verified.
+>
+> :memo: Check the latest [release note of this version](https://github.com/VasilKalchev/LEDDs/releases/tag/vX.Y) for a possible update on the fabrication status.
+
+-->
+
+
+<!-- release assessment templates (old)
 
 <details>
 <summary>release assessment templates</summary>

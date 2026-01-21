@@ -11,7 +11,7 @@
 </div>
 
 
-**LEDDs** is an open-hardware, DIY smart dimmer designed for 230 V LED bulbs. It is built around the ESP32-C3-12F and is designed to sit on a desk or table, replacing standard inline cord switches.
+**LEDDs** is an open-source hardware, DIY, smart dimmer for 230 V LED bulbs. It is built around the ESP32-C3-12F and is designed to sit on a desk or table, replacing standard inline cord switches.
 
 The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate** designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a **rotary encoder** so it can be controlled easily or used as a standalone device.
 
@@ -20,8 +20,8 @@ The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate
 
 > [!CAUTION]
 > **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
-> * Do not attempt to build this device unless you are experienced with high-voltage electronics.
-> * The device must be unplugged from mains power before opening the enclosure.
+> * Only build if you have relevant experience with high-voltage electronics.
+> * Always unplug before opening!
 > * While the design includes safety features (fuse, MOVs), it is not a certified design and should be treated with caution.
 
 
@@ -50,9 +50,9 @@ The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate
 ---
 
 ## :grey_question: Why trailing-edge?
-Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of every AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
+Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of the AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
 
-**LEDDs uses trailing-edge dimming.** By using MOSFETs to cut the waveform at the *end* of the AC cycle, the voltage ramps down smoothly. This results in:
+**LEDDs uses trailing-edge dimming.** By using MOSFETs to cut the waveform at the *end* of the AC cycle, there isn't a positive voltage spike. This results in:
 * reduced electrical noise and buzzing
 * smoother dimming with reduced flicker
 * lower minimum brightness levels
@@ -65,7 +65,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 - **Rotary encoder** control: rotate to dim, press+rotate for effects, press for on/off
 - LEDs: red (rotation feedback), blue (status indicator), white (ambient)
 - Included **enclosure design**: 100 mm × 51 mm × 25 mm - ideal for desk lamp modifications
-- Low idle power: ~0.3 W in standby
+- Low idle power: ~0.3 W
 - Open source: MIT licensed
 
 ## :straight_ruler: Specifications
@@ -92,11 +92,12 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 ---
 
 ## Release/fabrication of v2.0
-![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
+![Status: Stable](https://img.shields.io/badge/Stable-brightgreen?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Verified working.
+> The fabricated board from this release is fully functional. Minor issues may exist but do not affect operation: [/doc/releaselog.md v2.0][releaselog_v2_0].
+>
+> :memo: **Recommended for fabrication.**
 
-> The fabricated board from release v2.0 works; it has a few minor issues: [/doc/releaselog.md v2.0][releaselog_v2_0].
-> 
-> :memo: Recommended for fabrication!
 
 <p align="center">
   <a href="img/pcb-front_1440p.jpg"><img src="doc/assets/pcb-front_720p.jpg" alt="" title="PCB front" width="49%" /></a>
@@ -158,7 +159,7 @@ Check out the BOM provided in the release bundle for complete components list.
 
 ### 2. PCB assembly instructions
 > [!TIP]
-> Use the provided **interactive BOM** for soldering the components.
+> Use the provided **interactive BOM** as a soldering guide.
 
 <p align=center>
   <img src="doc/assets/ibom-screenshot_ann_720p.png" alt="interactive BOM preview" width="75%" />
@@ -176,7 +177,7 @@ Check out the BOM provided in the release bundle for complete components list.
 
 <img src="doc/assets/assembly/12f-720p.jpg" alt="esp-12f" width="50%" />
 
-- isolate pins 12 and 13 from the PCB pads (with tape)
+- insulate pins 12 and 13 from the PCB pads using kapton/electrical tape
 - solder JP2
 - don't solder R13
 - don't solder R6 and D3 ("led_1")
@@ -205,7 +206,7 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 - solder R23
 - no need to solder C13
 
-This optoisolator is the same as the one used for controlling the MOSFET's gate, but didn't work good for the zero-cross circuit.
+This optoisolator is the same as the one used for controlling the MOSFET's gate, but didn't work well for the zero-cross circuit.
 
 </details>
 
@@ -276,7 +277,7 @@ Integrating the device in Home Assistant: https://esphome.io/guides/getting_star
 
 The "Configuration" section allows customization of the device:
  - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
- - **Gamma correct**: Adjust the gamma correction to achieve linear dimming.
+ - **Gamma correct**: Adjust the dimming curve to appear linear to the human eye.
  - **Minimum level**: The lowest level at which the bulb emits light. *Note: this value needs to be updated every time gamma correction is changed.*
  - **Restore mode**: Initial state of the bulb when powered.
  - **Transition length**: How fast the bulb changes brightness in milliseconds.
@@ -327,12 +328,6 @@ Every type of contribution is welcome, like improvements or corrections to the:
 - ESPHome configuration
 
 Contributions can be made as improvements or as variants (e.g. different enclosure design, ESPHome configuration, etc.).
-
-The procedure is:
-- fork
-- branch
-- commit
-- pull request
 
 ```mermaid
 gitGraph
