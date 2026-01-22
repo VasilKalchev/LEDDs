@@ -26,6 +26,7 @@ The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate
 
 
 ## Table of contents
+* [Is this project for you?](#is-this-project-for-you)
 * [Why trailing-edge?](#grey_question-why-trailing-edge)
 * [Features](#star-features)
 * [Specifications](#straight_ruler-specifications)
@@ -48,6 +49,16 @@ The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate
 * [License](#license)
 
 ---
+
+## Is this project for you?
+This project is suitable if you:
+ - have experience with mains-powered electronics
+ - want a LED bulbs dimmer for a desk
+
+This project is NOT suitable if you:
+ - are new to electronics
+ - need a certified wall dimmer
+
 
 ## :grey_question: Why trailing-edge?
 Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of the AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
@@ -143,6 +154,14 @@ Check out the BOM provided in the release bundle for complete components list.
 
 
 ## :hammer: Build
+
+### Overview
+Building LEDDs consists of four main steps:
+ 1. Ordering the PCB, the chassis and the components.
+ 2. Assembling the PCB.
+ 3. Flashing and configuring the firmware.
+ 4. Wiring and final assembly.
+
 ### Prerequisites
 - skills: soldering [^2], experience with mains electricity
 - tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter
