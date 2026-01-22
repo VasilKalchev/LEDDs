@@ -15,7 +15,7 @@
 
 The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate** designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a **rotary encoder** so it can be controlled easily or used as a standalone device.
 
-![ledds](doc/assets/ledds-front_angle_1440p.jpg)
+[![ledds](doc/assets/ledds-720p.jpg)](img/ledds-720p.jpg)
 
 
 > [!CAUTION]
