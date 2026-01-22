@@ -70,7 +70,7 @@ light:
     default_transition_length: ${transition_length}
     gamma_correct: ${gamma_correct}
     restore_mode: ${restore_mode}
-    effects: !include packages/monochromic_effects.yaml
+    effects: !include monochromic_effects.yaml
 
   - platform: monochromatic
     id: red_led
