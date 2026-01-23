@@ -27,7 +27,7 @@ The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate
 
 ## Table of contents
 * [Is this project for you?](#is-this-project-for-you)
-* [Why trailing-edge?](#grey_question-why-trailing-edge)
+* [Why trailing-edge?](#why-trailing-edge)
 * [Features](#star-features)
 * [Specifications](#straight_ruler-specifications)
 * [Release/fabrication of version 2.0](#releasefabrication-of-v20)
@@ -60,7 +60,7 @@ This project is NOT suitable if you:
  - need a certified wall dimmer
 
 
-## :grey_question: Why trailing-edge?
+## Why trailing-edge?
 Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of the AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
 
 **LEDDs uses trailing-edge dimming.** By using MOSFETs to cut the waveform at the *end* of the AC cycle, there isn't a positive voltage spike. This results in:
@@ -316,6 +316,16 @@ There are three LEDs on the board:
 ### Default light effects
 Light effects can be cycled with the rotary encoder or chosen directly from a UI.
 
+ - Pulse (low, fast)
+ - Pulse (low, slow)
+ - Pulse (high, fast)
+ - Pulse (high, slow)
+ - Pulse (full, fast)
+ - Pulse (full, slow)
+ - Flicker (soft)
+ - Flicker (intense)
+
+<!--
 <div>
 <p align="center">
   <img src="/doc/assets/effect-pulse_low_fast.gif" alt="" title="Pulse (low, fast)" width="25%" />
@@ -330,6 +340,7 @@ Light effects can be cycled with the rotary encoder or chosen directly from a UI
   <img src="/doc/assets/effect-flicker_intense.gif" alt="" title="Flicker (intense)" width="25%" />
 </p>
 </div>
+-->
 
 
 ## :page_with_curl: Versions, releases and compatibility
