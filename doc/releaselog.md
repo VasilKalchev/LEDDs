@@ -1,7 +1,7 @@
 # Release log
 
 
-## v2.0 - 2025-04-02
+## v2.0 - 2026-01-26
 ### Hightlights
  - Switched MCU module to **ESP32-C3-12F**.
  - Added **USB-C** port for programming.
@@ -34,14 +34,6 @@
 > The fabricated board from this release is fully functional. Minor issues may exist but do not affect operation.
 >
 > :memo: **Recommended for fabrication.**
-
-<!--
-![very good fabrication](https://img.shields.io/badge/very%20good-lawngreen?style=for-the-badge&label=Release/fabrication%20result)
-
-> The fabricated board from release vX.Y works; it has a few minor issues.
->
-> :memo: Recommended for fabrication!
--->
 
 ### Fabbrication properties:
  - Fabricator: JLCPCB
