@@ -23,8 +23,9 @@
 ---
 
 <p align="center">
-  <img src="https://github.com/VasilKalchev/LEDDs/blob/<string>/doc/assets/<name>.jpg" alt="" title="" width="49%" />
-  <img src="https://github.com/VasilKalchev/LEDDs/blob/<string>/doc/assets/<name>.jpg" alt="" title="" width="49%" />
+  <a href="../img/pcb_assembled-side_right_1440p.jpg"><img src="assets/pcb_assembled-side_right_720p.jpg" alt="assebmled main PCB" width="33%" /></a>
+  <a href="../img/enclosure-front_angle_1440p.jpg"><img src="assets/enclosure-front_angle_720p.jpg" alt="assembled project" width="33%" /></a>
+  <a href="../img/ledds_on-side_bulb_1440p.jpg"><img src="assets/ledds_on-side_bulb_720p.jpg" alt="turned on" width="33%" /></a>
 </p>
 
 

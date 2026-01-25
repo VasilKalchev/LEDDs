@@ -15,7 +15,7 @@
 
 The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate** designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a **rotary encoder** so it can be controlled easily or used as a standalone device.
 
-[![ledds](doc/assets/ledds-720p.jpg)](img/ledds-1440p.jpg)
+[![ledds](doc/assets/ledds_on-front_720p.jpg)](img/ledds_on-front_1440p.jpg)
 
 
 > [!CAUTION]
@@ -68,7 +68,7 @@ Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bul
 * smoother dimming with reduced flicker
 * lower minimum brightness levels
 
-> The schematic and PCB can be [viewed][kicanvas_v2_0] in KiCanvas.
+> The schematic and PCB can be viewed in [KiCanvas][kicanvas_v2_0].
 
 ## :star: Features
 - **ESP32-C3** based with ESPHome firmware for integration with Home Assistant
@@ -168,7 +168,7 @@ Building LEDDs consists of four main steps:
 
 [^2]: Trickiest part is the USB-C port. The board can be ordered pre-assembled.
 
-[Download][dw_release_bundle_v2_0] the release bundle.
+Download the [release bundle][dw_release_bundle_v2_0].
 
 ### 1. Ordering the components
   - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
@@ -178,7 +178,7 @@ Building LEDDs consists of four main steps:
 
 ### 2. PCB assembly instructions
 > [!TIP]
-> Use the provided **interactive BOM** as a soldering guide.
+> Use the provided **interactive BOM** ("ibom.html") as a soldering guide.
 
 <p align=center>
   <img src="doc/assets/ibom-screenshot_ann_720p.png" alt="interactive BOM preview" width="75%" />
@@ -266,7 +266,7 @@ Use a USB to serial adapter.
  - Test before wiring.
 
 > [!TIP]
-> The YAML configurations used for compiling the provided binaries are available under [/fw/esphome_yamls/](/fw/esphome_yamls/).
+> The YAML configurations of the provided binaries are available under [/fw/esphome/yaml/](/fw/esphome/yaml/).
 
 ### 4. Preparing the enclosure
 - plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron
