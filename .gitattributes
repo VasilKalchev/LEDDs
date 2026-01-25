@@ -2,3 +2,5 @@
 # Linguist
 *.kicad_pcb linguist-detectable
 *.kicad_sch linguist-detectable
+
+*.html -linguist-detectable
