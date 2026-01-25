@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 mkdir ./gerbers_top_plate_jlcpcb/
 kicad-cli pcb export gerbers -o ./gerbers_top_plate_jlcpcb/ -l B.Cu,B.Mask,B.Silkscreen,B.Paste,F.Cu,F.Mask,F.Silkscreen,F.Paste,Edge.Cuts --no-x2 --subtract-soldermask --precision 6 ../top_plate.kicad_pcb
 
