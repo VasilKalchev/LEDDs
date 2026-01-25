@@ -26,7 +26,10 @@ fp-info-cache
 *.ses
 
 ## exports
+**/export/ibom.html
+**/export/*.svg
 **/export/*.mp4
+**/export/_rotate
 
 ## exported gerbers
 **/export/gerbers*
