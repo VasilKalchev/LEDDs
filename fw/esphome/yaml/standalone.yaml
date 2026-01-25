@@ -1,0 +1,14 @@
+
+packages:
+  - !include packages/common.yaml
+
+
+esphome:
+  name: "ledds2"
+  friendly_name: ${device_friendly_name}
+  comment: "trailing edge dimmer"
+  project:
+    name: "VasilKalchev.LEDDs"
+    version: "2.0"
+
+# -----

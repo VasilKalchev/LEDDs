@@ -25,27 +25,26 @@ fp-info-cache
 *.dsn
 *.ses
 
-## exported sheets
-/hw/export/*.pdf
-/hw/export/*.png
-/hw/export/*.svg
-
-## exported BOM files
-/hw/export/bom.*
-/hw/export/ibom.html
+## exports
+**/export/ibom.html
+**/export/*.svg
+**/export/*.mp4
+**/export/_rotate
 
 ## exported gerbers
-/hw/export/gerbers*
-/hw/export/*.zip
+**/export/gerbers*
+**/export/*.zip
 **/*_gerbers_*.zip
 
 ## exported models
-/hw/export/*.step
+**/export/*.step
 
 
 # ESPHome
-/.esphome/
-/secrets.yaml
+.venv/
+.esphome/
+secrets.yaml
+fw/esphome/yaml/.gitignore
 
 # Other
 _*

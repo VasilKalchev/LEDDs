@@ -1,0 +1,45 @@
+
+packages:
+  - !include packages/common_ui.yaml
+
+
+esphome:
+  name: "ledds2"
+  friendly_name: ${device_friendly_name}
+  comment: "trailing edge dimmer"
+  name_add_mac_suffix: true
+  project:
+    name: "VasilKalchev.LEDDs"
+    version: "2.0"
+  on_boot:
+    - priority: 0
+      then:
+        - output.set_min_power:
+            id: ${ac_dimmer_id}
+            min_power: !lambda "return (float)id(minimum_power_input).state / 100.0f;"
+
+        - lambda: |-
+            id(${light_id}).set_default_transition_length( id(default_transition_length_input).state );
+
+        - lambda: |-
+            id(${light_id}).set_gamma_correct( id(gamma_correct_input).state );
+
+        - lambda: |-
+            std::string option = id(restore_mode_input).current_option();
+
+            LightRestoreMode res_mode = LIGHT_ALWAYS_OFF;
+            if (option == "Off") {
+              res_mode = LIGHT_ALWAYS_OFF;
+              id(${light_id}).turn_off().perform(); // redundant because light's restore_mode is set to ALWAYS_OFF
+            } else if (option == "On") {
+              res_mode = LIGHT_ALWAYS_ON;
+              id(${light_id}).turn_on().perform();
+            } else {
+              id(${light_id}).turn_off().perform();
+            }
+
+# =====
+
+api:
+
+# =====

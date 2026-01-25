@@ -1,256 +1,413 @@
-# <p align="center">LEDDs</p>
-
-<p align="center">PCB and enclosure design of a trailing edge light bulbs dimmer</p>
-
-<p align="center">
-  <img alt="PCB design: KiCad" src="https://img.shields.io/badge/KiCad-ivory?style=flat-square&logo=kicad&logoSize=auto&label=PCB&link=https://www.esphome.io" />
-  <img alt="Firmware: ESPHome" src="https://img.shields.io/badge/ESPHome-ivory?style=flat-square&logo=esphome&logoSize=auto&label=Firmware&link=https://www.kicad.org" />
-  <img alt="Enclosure design: Tinkercad" src="https://img.shields.io/badge/Tinkercad-ivory?style=flat-square&logo=tinkercad&logoSize=auto&label=Enclosure&link=https%3A%2F%2Fwww.tinkercad.com%2Fthings%2FahXHN7lsDMm-ledds-enclosure-v10" />
+<p align=center>
+  <img src="doc/assets/ledds-front-illustration-title.png" alt="LEDDs" title="LEDDs" width="50%" />
 </p>
 
-![Photo of the completed project][ledds-side_trn]
+<p align=center>trailing-edge dimmer for LED bulbs</p>
+
+<div align=center>
+
+![schematic_pcb](https://img.shields.io/badge/KiCad-msg?style=flat-square&logo=kicad&logoColor=ivory&logoSize=auto&label=Schematic%20%2F%20PCB&labelColor=grey&color=gainsboro) ![firmware](https://img.shields.io/badge/ESPHome-msg?style=flat-square&logo=esphome&logoColor=ivory&logoSize=auto&label=Firmware&labelColor=grey&color=gainsboro&link=https%3A%2F%2Fesphome.io) ![chassis](https://img.shields.io/badge/Tinkercad-msg?style=flat-square&logo=tinkercad&logoColor=ivory&logoSize=auto&label=Chassis&labelColor=grey&color=gainsboro&link=https%3A%2F%2Fwww.tinkercad.com%2F)
+
+</div>
 
 
-## Fabrication of v1.0
+**LEDDs** is an open-source hardware, DIY, smart dimmer for 230 V LED bulbs. It is built around the ESP32-C3-12F and is designed to sit on a desk or table, replacing standard inline cord switches.
 
-![ok fabrication](https://img.shields.io/badge/ok-greenyellow?style=for-the-badge&label=fabrication%20result)
-> The fabricated board from release v1.0 worked, but has some [minor problems][releaselog_v1_0].
+The project consists of a **PCB**, a **3D-printable chassis**, and a **top plate** designed as a PCB. It runs [ESPHome](https://esphome.io) for integration with Home Assistant and features a **rotary encoder** so it can be controlled easily or used as a standalone device.
+
+[![ledds](doc/assets/ledds_on-front_720p.jpg)](img/ledds_on-front_1440p.jpg)
+
+
+> [!CAUTION]
+> **MAINS VOLTAGE:** This device operates at **230 VAC**. Touching live components can result in serious injury or death.
+> * Only build if you have relevant experience with high-voltage electronics.
+> * Always unplug before opening!
+> * While the design includes safety features (fuse, MOVs), it is not a certified design and should be treated with caution.
+
+
+## Table of contents
+* [Is this project for you?](#is-this-project-for-you)
+* [Why trailing-edge?](#why-trailing-edge)
+* [Features](#star-features)
+* [Specifications](#straight_ruler-specifications)
+* [Release/fabrication of version 2.0](#releasefabrication-of-v20)
+* [Repository structure](#open_file_folder-repository-structure)
+* [Bill of materials](#euro-bill-of-materials)
+* [Build](#hammer-build)
+   * [Prerequisites](#prerequisites)
+   * [1. Ordering the components](#1-ordering-the-components)
+   * [2. PCB assembly instructions](#2-pcb-assembly-instructions)
+   * [3. Flashing the firmware](#3-flashing-the-firmware)
+   * [4. Preparing the enclosure](#4-preparing-the-enclosure)
+   * [5. Final assembly](#5-final-assembly)
+* [Usage](#bulb-usage)
+   * [Control](#control)
+   * [LED indicators](#led-indicators)
+   * [Default light effects](#default-light-effects)
+* [Versions, releases and compatibility](#page_with_curl-versions-releases-and-compatibility)
+* [Contributing](#coffee-contributing)
+* [License](#license)
+
+---
+
+## Is this project for you?
+This project is suitable if you:
+ - have experience with mains-powered electronics
+ - want a LED bulbs dimmer for a desk
+
+This project is NOT suitable if you:
+ - are new to electronics
+ - need a certified wall dimmer
+
+
+## Why trailing-edge?
+Most dimmers use **leading-edge** (TRIAC) dimming (designed for incandescent bulbs). They modulate power to the load by cutting the beginning of the AC half cycle. This creates a voltage spike that can cause buzzing and reduced lifespan in the capacitive power supplies found in LED bulbs.
+
+**LEDDs uses trailing-edge dimming.** By using MOSFETs to cut the waveform at the *end* of the AC cycle, there isn't a positive voltage spike. This results in:
+* reduced electrical noise and buzzing
+* smoother dimming with reduced flicker
+* lower minimum brightness levels
+
+> The schematic and PCB can be viewed in [KiCanvas][kicanvas_v2_0].
+
+## :star: Features
+- **ESP32-C3** based with ESPHome firmware for integration with Home Assistant
+- **Standalone** operation, doesn't require Home Assistant
+- **Rotary encoder** control: rotate to dim, press+rotate for effects, press for on/off
+- LEDs: red (rotation feedback), blue (status indicator), white (ambient)
+- Included **enclosure design**: 100 mm × 51 mm × 25 mm - ideal for desk lamp modifications
+- Low idle power: ~0.3 W
+- Open source: MIT licensed
+
+## :straight_ruler: Specifications
+
+| Parameter              | Value                        |
+| ---------------------- | ---------------------------- |
+| Input voltage          | 230 VAC                      |
+| Maximum output power   | 100 W                        |
+| Idle power draw        | ~0.3 W                       |
+| Protections            | fuse and MOVs                |
+| Microcontroller module | ESP32-C3-12F [^1]            |
+| Dimensions             | 100 × 51 × 25 mm (W × D × H) |
+| Connectivity           | Wi-Fi, USB-C (programming)   |
+
+[^1]: Also compatible with ESP8266 ESP-12F, but not recommended.
+
+
+> [!IMPORTANT]
+> Designed for 230 VAC at 50 Hz.
+>
+> Usage with 120 VAC at 60 Hz will probably require adjusting the component values of the zero-cross and the voltage regulator circuits.
+
+
+---
+
+## Release/fabrication of v2.0
+![Status: Stable](https://img.shields.io/badge/Stable-brightgreen?style=for-the-badge&label=Release/fabrication%20result)
+> **Status:** Verified working.
+> The fabricated board from this release is fully functional. Minor issues may exist but do not affect operation: [/doc/releaselog.md v2.0][releaselog_v2_0].
+>
+> :memo: **Recommended for fabrication.**
+
 
 <p align="center">
-  <img src="/doc/assets/pcb-top_green_720p.jpg" alt="PCB - top" title="PCB - top" width="33%" />
-  <img src="/doc/assets/pcb-bottom_green_720p.jpg" alt="PCB - bottom" title="PCB - bottom" width="33%" />
-  <img src="/doc/assets/pcb-assembled_side_yellow_720p.jpg" alt="PCB - assembled, side" title="PCB - assembled, side" width="33%" />
-</p>
-
-<p align="center">
-  <img src="/doc/assets/chassis-top_green_720p.jpg" alt="Chassis - top" title="Chassis - top" width="33%" />
-  <img src="/doc/assets/pcb_chassis-assembled_front_red_720p.jpg" alt="PCB, chassis - assembled, front" title="PCB, chassis - assembled, front" width="33%" />
-  <img src="/doc/assets/enclosure-assembled_side_red_720p.jpg" alt="Enclosure - assembled, side" title="Enclosure - assembled, side" width="33%" />
+  <a href="img/pcb-front_1440p.jpg"><img src="doc/assets/pcb-front_720p.jpg" alt="" title="PCB front" width="49%" /></a>
+  <a href="img/pcb-back_1440p.jpg"><img src="doc/assets/pcb-back_720p.jpg" alt="" title="PCB back" width="49%" /></a>
 </p>
 
 ---
 
+## :open_file_folder: Repository structure
+```
 
-## Features
-### Suitable for dimmable LED bulbs
-Uses MOSFETs to switch off the voltage on the trailing edge.
+├── hw/                       # main PCB design (KiCad project)
+│   ├── lib/                  # symbols and footprints
+│   ├── assets/               # fonts and graphics
+│   └── export/               # scripts for exporting gerbers, BOM and schematics/PCB PDFs
+├── fw/                       # ESPHome YAML configurations and firmware binaries
+├── doc/                      # additional documentation
+│   ├── releaselog.md         # main PCB release log
+│   ├── changelog.md          # main PCB change log
+├── enclosure/
+│   ├── chassis/              # 3D printable chassis
+│   │   ├── releaselog.md     # chassis release log
+│   │   ├── changelog.md      # chassis change log
+│   │   ├── vX.Y-variant_a/
+│   │   └── vX.Y-variant_b/
+│   └── top_plate/            # top plate design (KiCad project)
+│       ├── releaselog.md     # top plate release log
+│       ├── changelog.md      # top plate change log
+│       ├── vX.Y-variant_a/
+│       └── vX.Y-variant_b/
+└── img/                      # photos and renders
+```
 
-### Rotary encoder for direct control
-Fully usable as a standalone device.
+---
 
-Default rotary encoder functions:
- - rotate for brightness adjustment
- - press to turn ON/OFF
- - press and rotate to cycle through the effects
+## :euro: Bill of materials
+ - components: ~€15
+ - PCB: €4 (ordered as prototype board)
+ - top plate: €0-4 (can be combined with the main PCB)
+ - chassis: €4-10 (when ordered)
 
-### Runs ESPHome firmware
-Example configuration in [fw/example/](fw/example/).
-
-### Enclosure
-The enclosure consists of a 3D printed open-box chassis and a PCB top cover.
-
-#### 3D printed chassis
-[![Chassis - render][chassis-render]][tinkercad_design_v10]
-
-Located in [enclosure/chassis](enclosure/chassis).
-
-#### PCB top plate
-Located in [enclosure/top_plate/](enclosure/top_plate/).
-
-
-## Specifications
- - input voltage: ~230 V
- - maximum output power: 100 W
- - idle power draw: 0.5 W
- - dimensions:
-   - width: 100 mm
-   - depth: 51 mm
-   - height: 25 mm
+Check out the BOM provided in the release bundle for complete components list.
 
 
-## Making the project
-### 1. Ordering the parts
-#### 1.1. PCB and top plate
-Download the [PCB gerbers][dw_gerbers] and the [top plate gerbers][dw_top_plate_gerbers].
+## :hammer: Build
 
-Or download the [combined gerbers][dw_combined_gerbers]. These include the PCB and the top plate on a single PCB.
+### Overview
+Building LEDDs consists of four main steps:
+ 1. Ordering the PCB, the chassis and the components.
+ 2. Assembling the PCB.
+ 3. Flashing and configuring the firmware.
+ 4. Wiring and final assembly.
 
-#### 1.2. 3D printed chassis
-Download the [chassis STL file][dw_chassis_stl].
+### Prerequisites
+- skills: soldering [^2], experience with mains electricity
+- tools: soldering iron, hot air gun (recommended), 3D printer or access to 3D printing service, multimeter
 
-Tested printing parameters:
-JLC3DP:
- - technology: FDM (plastic)
- - material: PLA
- - color: white
- - surface finish: no
+[^2]: Trickiest part is the USB-C port. The board can be ordered pre-assembled.
 
-#### 1.3. Components
-Download the [BOM][dw_bom].
+Download the [release bundle][dw_release_bundle_v2_0].
 
-Download the [enclosure's BOM][dw_enclosure_bom].
+### 1. Ordering the components
+  - **PCBs**: order the main PCB and the top plate PCB from your preferred fabricator
+    - gerbers for JLCPCB: available in the bundle
+    - for other fabricators - use KiCad to generate gerbers according to the manufacturer's instructions
+  - **chassis**: choose a variant from the provided STL files
 
-### 2. PCB assembly
-Use the [interactive BOM][dw_ibom].
+### 2. PCB assembly instructions
+> [!TIP]
+> Use the provided **interactive BOM** ("ibom.html") as a soldering guide.
 
-### 3. Firmware upload
-> [!NOTE]
-> A USB-to-UART adapter module is required.
-
-  1. Download the provided [ESPHome example configuration][dw_esphome_cfg].
-  2. Follow [ESPHome's getting started guide][esphome_getting_started] to compile and upload the firmware.
-
-### 4. Enclosure
-#### 1. Melt the threaded inserts into the enclosure.
-![Chassis - top][chassis-top_green]
-
-#### 2. Insert the PCB into the enclosure and screw in the cables.
-![PCB, chassis - assembled, top][pcb_chassis-assembled_top_red]
-
-#### 3. Insert the screws in the top plate and place the spacers around the screws.
-![Plate - assembled, bottom][plate-assembled_bottom_blue]
-
-#### 4. Screw the top plate through the PCB into the enclosure.
-![Enclosure - assembled, side][enclosure-assembled_side_red]
+<p align=center>
+  <img src="doc/assets/ibom-screenshot_ann_720p.png" alt="interactive BOM preview" width="75%" />
+</p>
 
 
-## Contributing
-Every type of contribution is welcome, like improvements or corrections on the:
- - documentation
- - schematic/PCB design
- - enclosure (chassis and top panel) design
- - ESPHome configuration
+#### Microcontroller module
+<strong>ESP32-C3-12F (recommended)</strong>
 
-Contributions can be made as improvements or as variants (e.g. different enclosure design, ESPHome configuration, etc.).
+<img src="doc/assets/assembly/c3_12f-720p.jpg" alt="esp32-c3-12f" width="50%" />
 
-The procedure is:
- - fork
- - branch
- - commit
- - pull request
- 
-You're welcome to post photos in [Discussions: Show and tell][discussions_show_and_tell].
+- solder R13
 
+<details><summary><strong>ESP8266 ESP-12F (not recommended)</strong></summary>
 
-<!-- links -->
-[discussions_show_and_tell]: https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell
+<img src="doc/assets/assembly/12f-720p.jpg" alt="esp-12f" width="50%" />
 
-[releaselog_v1_0]: /doc/releaselog.md#v10---2025-02-17 "/doc/releaselog.md"
-[repo_release_v1_0]: https://github.com/VasilKalchev/LEDDs/releases/tag/v1.0 "Release v1.0"
-[repo_releases]: https://github.com/VasilKalchev/LEDDs/releases "All releases"
+- insulate pins 12 and 13 from the PCB pads using kapton/electrical tape
+- solder JP2
+- don't solder R13
+- don't solder R6 and D3 ("led_1")
+- don't solder R8 and D5 ("led_3")
 
-<!-- release assets -->
-[dw_gerbers]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/gerbers_jlcpcb.zip "gerbers_jlcpcb.zip from release v1.0"
-[dw_top_plate_gerbers]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/top_plate_gerbers_jlcpcb.zip "top_plate_gerbers_jlcpcb.zip from release v1.0"
-[dw_combined_gerbers]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/combined_gerbers_jlcpcb.zip "combined_gerbers_jlcpcb.zip from release v1.0"
-[dw_bom]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/bom.csv "bom.csv from release v1.0"
-[dw_enclosure_bom]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/enclosure_bom.csv "enclosure_bom.csv from release v1.0"
-[dw_ibom]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/ibom.html "ibom.html from release v1.0"
-[dw_chassis_stl]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/chassis.stl "chassis.stl from release v1.0"
-[dw_esphome_cfg]: https://github.com/VasilKalchev/LEDDs/releases/download/v1.0/LEDDs.yaml "LEDDs.yaml from release v1.0"
-<!-- /release assets -->
-
-<!-- photos and screenshots -->
-[ledds-side_trn]: /doc/assets/ledds-side_trn_720p.png
-[ledds-front_trn]: /doc/assets/ledds-front_trn_720p.png
-[pcb-top_green]: /doc/assets/pcb-top_green_720p.jpg
-[pcb-bottom_green]: /doc/assets/pcb-bottom_green_720p.jpg
-[pcb-assembled_side_yellow]: /doc/assets/pcb-assembled_side_yellow_720p.jpg
-[pcb-assembled_front_red]: /doc/assets/pcb-assembled_front_red_720p.jpg
-[pcb-assembled_bottom_yellow]: /doc/assets/pcb-assembled_bottom_yellow_720p.jpg
-[pcb_chassis-assembled_front_red]: /doc/assets/pcb_chassis-assembled_front_red_720p.jpg
-[pcb_chassis-assembled_top_red]: /doc/assets/pcb_chassis-assembled_top_red_720p.jpg
-[plate-top_green]: /doc/assets/plate-top_green_720p.jpg
-[plate-assembled_top_blue]: /doc/assets/plate-assembled_top_blue_720p.jpg
-[plate-assembled_bottom_blue]: /doc/assets/plate-assembled_bottom_blue_720p.jpg
-[chassis-side_green]: /doc/assets/chassis-side_green_720p.jpg
-[chassis-top_green]: /doc/assets/chassis-top_green_720p.jpg
-[chassis-bottom_green]: /doc/assets/chassis-bottom_green_720p.jpg
-[enclosure-assembled_side_red]: /doc/assets/enclosure-assembled_top_red_720p.jpg
-
-[chassis-render]: /doc/assets/chassis-render.png
-<!-- /photos and screenshots -->
-
-<!-- external -->
-[tinkercad_design_v10]: https://www.tinkercad.com/things/ahXHN7lsDMm-ledds-chassis-v10 "Open Tinkercad design"
-[esphome_getting_started]: https://esphome.io/guides/getting_started_hassio "Getting Started with ESPHome and Home Assistant"
-[jlcpcb_gerbers_spec]: https://jlcpcb.com/help/article/how-to-generate-gerber-and-drill-files-in-kicad-8 "JLCPCB: How to generate Gerber and drill files in KiCad 8"
-<!-- /external -->
-
-<!-- /links -->
-
-
-<!-- checklist & fabrication result template
-
-<details>
-<summary>/readme.md checklist</summary>
-
- - [x] set current version (after project name)
- - [x] set fabrication status
- - [x] update the sections as needed
- - [x] comment out this "checklist" and "templates" sections
+ESP8266 doesn't support native USB and requires an external USB to serial adapter for programming.
 
 </details>
 
+#### Zero-cross optoisolator
+The PCB has footprints for a choice between 2 optoisolators that connect the zero-cross signal to the MCU.
+
+<strong>H11L1SR2M</strong>
+
+<img src="doc/assets/assembly/h11l1-720p.jpg" alt="h11l1" width="50%" />
+
+ - solder the optoisolator on footprint U4
+ - solder C13
+ - don't solder R23
+
+<details><summary><strong>PC817XI (not recommended)</strong></summary>
+
+<img src="doc/assets/assembly/pc817-720p.jpg" alt="pc817" width="50%" />
+
+- solder the optoisolator on footprint U3
+- solder R23
+- no need to solder C13
+
+This optoisolator is the same as the one used for controlling the MOSFET's gate, but didn't work well for the zero-cross circuit.
+
+</details>
+
+#### Skipping the relay
+The relay is used to power off the mains part of the circuit when the load is turned off. This is intended as a peace of mind feature and can be omitted.
+
+<img src="doc/assets/assembly/relay-720p.jpg" alt="relay" width="50%" />
+
+ - use a wire to short pin 11 to 14
+ - use a wire to short pin 21 to 24
+ - no need to solder C3, D2, R2 and Q1
+
+#### Skipping the rotary encoder
+<img src="doc/assets/assembly/boot_button-720p.jpg" alt="boot button" width="50%" />
+
+If the rotary encoder is not required - solder a push button (SW2) so boot mode can be entered manually.
+
+ - no need to solder R3, R4, C4, C5 and C6
+
+A modified top plate (without a hole in the middle) is recommended for safety reasons (not currently available).
+
+#### Using the UART header instead of the USB for programming *(not tested)*
+<img src="doc/assets/assembly/uart-720p.jpg" alt="uart" width="50%" />
+
+ - solder R12
+ - solder header J4
+ - no need to solder R9 and R10
+
+Use a USB to serial adapter.
+
+### 3. Flashing the firmware
+ - Connect to the board via USB-C.
+ - Use [ESPHome's web flasher](https://web.esphome.io/) to upload one of the provided firmware binaries.
+   - hass.bin: Home Assistant + rotary encoder
+   - web_server.bin: self hosted web server + rotary encoder
+   - standalone: rotary encoder only
+ - Set your Wi-Fi credentials using the ESPHome web flasher.
+ - Test before wiring.
+
+> [!TIP]
+> The YAML configurations of the provided binaries are available under [/fw/esphome/yaml/](/fw/esphome/yaml/).
+
+### 4. Preparing the enclosure
+- plastic chassis: install the heat-set threaded inserts in the holes using a soldering iron
+- resin chassis: no preparation needed
+
+### 5. Final assembly
+ - Mount a knob to the rotary encoder.
+ - Place the PCB inside the chassis.
+ - Screw the mains power cable to the terminal on the left (marked with a power plug). **Don't connect power until fully assembled.**
+ - Screw the lamp socket cable to the terminal on the right (marked with a bulb).
+ - Pass the screws through the top plate and place the spacers on the screws.
+ - Screw the top plate through the PCB into the chassis.
+
+
+## :bulb: Usage
+### Control
+**Directly** *(possible with all firmware variants)*:
+ - **press**: on/off
+ - **rotate**: brightness adjustment
+ - **press + rotate**: cycle lighting effects
+
+**Home Assistant** *(included in hass.bin)*:
+
+Integrating the device in Home Assistant: https://esphome.io/guides/getting_started_hassio/#connecting-your-device-to-home-assistant.
+
+![screenshot of the device in Home Assistant](doc/assets/hass-screenshot.png)
+
+The "Configuration" section allows customization of the device:
+ - **Bulb power rating**: input the power rating of the bulb, this is used for the power estimation sensor ("Power \[est\]").
+ - **Gamma correct**: Adjust the dimming curve to appear linear to the human eye.
+ - **Minimum level**: The lowest level at which the bulb emits light. *Note: this value needs to be updated every time gamma correction is changed.*
+ - **Restore mode**: Initial state of the bulb when powered.
+ - **Transition length**: How fast the bulb changes brightness in milliseconds.
+ - **LED: red/blue/white**: set the ambient brightness of the LEDs.
+
+**Web server** *(included in web_server.bin)*:
+> This is useful if you don't have Home Assistant, but want to control the device remotely.
+
+![screenshot of the web UI](doc/assets/web_server-screenshot.png)
+
+### LED indicators
+There are three LEDs on the board:
+ - **red (top, led_1):** ambient / rotation feedback
+ - **blue (top, led_2):** ambient / status indicator
+ - **white (bottom, led_3):** ambient
+
+### Default light effects
+Light effects can be cycled with the rotary encoder or chosen directly from a UI.
+
+ - Pulse (low, fast)
+ - Pulse (low, slow)
+ - Pulse (high, fast)
+ - Pulse (high, slow)
+ - Pulse (full, fast)
+ - Pulse (full, slow)
+ - Flicker (soft)
+ - Flicker (intense)
+
+<!--
+<div>
+<p align="center">
+  <img src="/doc/assets/effect-pulse_low_fast.gif" alt="" title="Pulse (low, fast)" width="25%" />
+  <img src="/doc/assets/effect-pulse_low_slow.gif" alt="" title="Pulse (low, slow)" width="25%" />
+  <img src="/doc/assets/effect-pulse_high_fast.gif" alt="" title="Pulse (high, fast)" width="25%" />
+  <img src="/doc/assets/effect-pulse_high_slow.gif" alt="" title="Pulse (high, slow)" width="25%" />
+</p>
+<p align="center">
+  <img src="/doc/assets/effect-pulse_full_fast.gif" alt="" title="Pulse (full, fast)" width="25%" />
+  <img src="/doc/assets/effect-pulse_full_slow.gif" alt="" title="Pulse (full, slow)" width="25%" />
+  <img src="/doc/assets/effect-flicker_soft.gif" alt="" title="Flicker (soft)" width="25%" />
+  <img src="/doc/assets/effect-flicker_intense.gif" alt="" title="Flicker (intense)" width="25%" />
+</p>
+</div>
+-->
+
+
+## :page_with_curl: Versions, releases and compatibility
+Each fabrication run results in a **GitHub release**.
+- Semantic versioning (major.minor), no patch versions.
+- PCB, chassis, and top plate are versioned independently.
+- Same **major versions fit together**.
+
+
+## :coffee: Contributing
+Every type of contribution is welcome, like improvements or corrections to the:
+- schematic/PCB design
+- documentation
+- enclosure (chassis and top panel) design
+- ESPHome configuration
+
+Contributions can be made as improvements or as variants (e.g. different enclosure design, ESPHome configuration, etc.).
+
+```mermaid
+gitGraph
+    commit tag: "v1.0"
+    branch improve_x
+    checkout improve_x
+    commit id: "Improve x"
+    commit id: "Re-generate exports"
+    commit id: "Update board documentation"
+    checkout main
+    merge improve_x tag: "v1.1"
+    branch replace_y
+    checkout replace_y
+    commit id: "Replace y"
+    commit id: "Generate exports"
+    commit id: "Compile binaries"
+    commit id: "Update all documentation"
+    checkout main
+    merge replace_y tag: "v2.0"
+```
+
+You're welcome to post your builds in [Discussions: Show and tell](https://github.com/VasilKalchev/LEDDs/discussions/categories/show-and-tell).
+
+## License
+This project is licensed under the **MIT License**.
+
+---
+
+**Disclaimer**: This project involves mains voltage electricity. The author assumes no liability for injury, damage, or regulatory violations. Build and use at your own risk. Ensure compliance with local electrical codes and regulations.
+
+
+<!-- current version links -->
+
+[kicanvas_v2_0]: https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2FVasilKalchev%2FLEDDs%2Ftree%2Fv2.0%2Fhw
+[dw_release_bundle_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/bundle.zip
+
+[releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02
+
+<!-- /current version links -->
+
+
+<!-- checklist
 <details>
-<summary>/readme.md templates</summary>
+<summary>/readme.md checklist</summary>
 
-## "Fabrication result" section:
-
-![bad fabrication](https://img.shields.io/badge/bad-firebrick?style=for-the-badge&label=fabrication%20result)
-> The fabricated board from release vX.Y [didn't work](/doc/releaselog.md#vXY---202Y-MM-DD).
->
-> :exclamation: Browse [repository releases][repo_releases] for a better version.
-
----
-
-![poor fabrication](https://img.shields.io/badge/poor-orangered?style=for-the-badge&label=fabrication%20result)
-> The fabricated board from release vX.Y works, but has [significant problems](/doc/releaselog.md#vXY---202Y-MM-DD).
->
-> :exclamation: Browse [repository releases][repo_releases] for a better version.
-
----
-
-![average fabrication](https://img.shields.io/badge/average-yellow?style=for-the-badge&label=fabrication%20result)
-> The fabricated board from release vX.Y works, but has [some problems](/doc/releaselog.md#vXY---202Y-MM-DD).
->
-> :grey_exclamation: Browse [repository releases][repo_releases] for a better version.
-
----
-
-![ok fabrication](https://img.shields.io/badge/ok-greenyellow?style=for-the-badge&label=fabrication%20result)
-> The fabricated board from release vX.Y works, but has some [minor problems](/doc/releaselog.md#vXY---202Y-MM-DD).
->
-> :memo: Browse [repository releases][repo_releases] for a better version.
-
----
-
-![good fabrication](https://img.shields.io/badge/good-limegreen?style=for-the-badge&label=fabrication%20result)
-> The fabricated board from release vX.Y works without problems!
->
-> :tada: Recommended for fabrication.
-
----
-
-![in development](https://img.shields.io/badge/in_development-dimgrey?style=for-the-badge&label=fabrication%20result)
-> This version is currently in development...
->
-> :hourglass_flowing_sand: Wait for the release or browse [repository releases][repo_releases] for an older, completed version.
-
----
-
-![will not fabricate](https://img.shields.io/badge/won\'t_be_fabricated-firebrick?style=for-the-badge&label=fabrication%20result)
-> Release vX.Y won't be fabricated, because ... .
->
-> :exclamation: Browse [repository releases][repo_releases] for a better version.
-
----
-
-![fix, not fabricated](https://img.shields.io/badge/fix%20(not%20fabricated)-indigo?style=for-the-badge&label=fabrication%20result)
-> [Release vX.Y](/doc/releaselog.md#vX.Y) is a fix for vX.Y, but was not fabricated at the time of release.
->
-> :memo: Check the latest [release note of this version](https://github.com/VasilKalchev/LEDDs/releases/tag/vX.Y) for a possible update on the fabrication status.
+ - [x] set release result (template in releaselog.md)
+ - [x] update the sections as needed
+ - [x] comment out this checklist
 
 </details>
 
 -->
+<!-- /checklist -->
