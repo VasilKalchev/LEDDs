@@ -392,7 +392,7 @@ This project is licensed under the **MIT License**.
 <!-- current version links -->
 
 [kicanvas_v2_0]: https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2FVasilKalchev%2FLEDDs%2Ftree%2Fv2.0%2Fhw
-[dw_release_bundle_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/bundle.zip
+[dw_release_bundle_v2_0]: https://github.com/VasilKalchev/LEDDs/releases/download/v2.0/LEDDs.v2.0.zip
 
 [releaselog_v2_0]: /doc/releaselog.md#v20---2025-04-02
 
