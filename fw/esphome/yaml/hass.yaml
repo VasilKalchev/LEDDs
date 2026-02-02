@@ -1,4 +1,3 @@
-
 packages:
   - !include packages/common_ui.yaml
 
@@ -7,7 +6,6 @@ esphome:
   name: "ledds2"
   friendly_name: ${device_friendly_name}
   comment: "trailing edge dimmer"
-  name_add_mac_suffix: true
   project:
     name: "VasilKalchev.LEDDs"
     version: "2.0"
@@ -38,8 +36,4 @@ esphome:
               id(${light_id}).turn_off().perform();
             }
 
-# =====
-
 api:
-
-# =====

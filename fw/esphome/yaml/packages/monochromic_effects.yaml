@@ -34,7 +34,6 @@
     update_interval: 10s
     min_brightness: 1%
     max_brightness: 100%
-
 - flicker:
     name: "Flicker (soft)"
     alpha: 85%

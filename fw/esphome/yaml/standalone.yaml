@@ -1,4 +1,3 @@
-
 packages:
   - !include packages/common.yaml
 
@@ -10,5 +9,3 @@ esphome:
   project:
     name: "VasilKalchev.LEDDs"
     version: "2.0"
-
-# -----

@@ -1,4 +1,3 @@
-
 packages:
   - !include common.yaml
 
@@ -56,9 +55,6 @@ sensor:
     icon: "mdi:flash"
     accuracy_decimals: 1
     update_interval: never
-
-
-### Configuration ---
 
 
 number:
@@ -167,8 +163,6 @@ select:
           }
 
           ESP_LOGV("main", "Restore mode index: %d\n", res_mode);
-
-### Configuration ---
 
 
 button:
