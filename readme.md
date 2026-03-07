@@ -215,14 +215,12 @@ The PCB has footprints for a choice between 2 optoisolators that connect the zer
 
  - solder the optoisolator on footprint U4
  - solder C13
- - don't solder R23
 
 <details><summary><strong>PC817XI (not recommended)</strong></summary>
 
 <img src="doc/assets/assembly/pc817-720p.jpg" alt="pc817" width="50%" />
 
 - solder the optoisolator on footprint U3
-- solder R23
 - no need to solder C13
 
 This optoisolator is the same as the one used for controlling the MOSFET's gate, but didn't work well for the zero-cross circuit.
